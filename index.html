@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geoterra Solutions | Solid Foundations, Smarter Roads</title>
+    <meta name="description" content="Specializing in advanced in-situ shallow soil mix and solidification technology for faster, greener infrastructure development in Malaysia.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary-blue: #0E3C7E; /* Deep Blue from PDF */
+            --primary-green: #2E7D32; /* Eco Green from PDF */
+            --accent-light: #F5F7FA;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-green);
+            color: white;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: var(--transition);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #1b5e20;
+            transform: translateY(-2px);
+        }
+
+        /* --- HEADER & NAV --- */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .logo i {
+            color: var(--primary-green);
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--primary-blue);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(14, 60, 126, 0.7), rgba(14, 60, 126, 0.5)), 
+                        url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1920&auto=format&fit=crop'); /* Placeholder Construction Image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-top: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text .highlight {
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .vision-mission-box {
+            margin-top: 30px;
+            background: var(--accent-light);
+            padding: 20px;
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .vision-mission-box h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        /* --- TECH SECTION --- */
+        .tech-section {
+            background-color: #1a1a1a;
+            color: white;
+            text-align: center;
+        }
+
+        .tech-section h2 {
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+
+        .tech-section .subtitle {
+            color: #ccc;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .tech-card {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .tech-card:hover {
+            transform: translateY(-10px);
+            background: #333;
+        }
+
+        .tech-card i {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .tech-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .tech-card ul {
+            list-style: disc;
+            padding-left: 20px;
+            color: #ddd;
+        }
+
+        /* --- ADVANTAGES SECTION --- */
+        .advantages {
+            background-color: var(--accent-light);
+            text-align: center;
+        }
+
+        .advantages h2 {
+            color: var(--primary-blue);
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+        }
+
+        .adv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .adv-item {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .adv-item:hover {
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .adv-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(46, 125, 50, 0.1);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 20px;
+        }
+
+        .adv-item h3 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        /* --- COMPARISON SECTION (The 10 Months Saving) --- */
+        .comparison {
+            background: white;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comp-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .comp-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .comp-header h2 {
+            color: var(--primary-blue);
+        }
+
+        .comp-visual {
+            width: 100%;
+            max-width: 900px;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .timeline-bar {
+            margin-bottom: 25px;
+        }
+
+        .timeline-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .bar-bg {
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .bar-conventional {
+            width: 100%; /* Represents full time */
+            background-color: #d32f2f; /* Red for slow */
+        }
+
+        .bar-geoterra {
+            width: 40%; /* Represents faster time */
+            background-color: var(--primary-green); /* Green for fast */
+            animation: growBar 2s ease-out;
+        }
+
+        @keyframes growBar {
+            from { width: 0; }
+            to { width: 40%; }
+        }
+
+        .saving-badge {
+            margin-top: 20px;
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ffeeba;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .projects {
+            background-color: #F9FAFB;
+        }
+        
+        .projects h2 {
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .project-img {
+            height: 200px;
+            background-color: #ddd;
+            position: relative;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .project-info p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .data-tag {
+            display: inline-block;
+            background: rgba(14, 60, 126, 0.1);
+            color: var(--primary-blue);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+
+        .footer-col ul li i {
+            margin-right: 10px;
+            color: var(--primary-green);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .partners {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .partner-logo-box {
+            background: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: var(--primary-blue);
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Simplified mobile nav for this demo */
+            .logo { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fa-solid fa-layer-group"></i>
+                    GEOTERRA SOLUTIONS
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#technology">Technology</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact" class="btn">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>Solid Foundations,<br>Smarter Roads.</h1>
+            <p>Advanced in-situ shallow soil mix and solidification technology. <br>Faster, greener, and more cost-effective infrastructure development.</p>
+            <a href="#technology" class="btn">Discover Our Technology</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>Company Profile</h2>
+                    <p><strong>Geoterra Solutions Sdn Bhd</strong> specializes in advanced soil stabilization. Using in-situ shallow soil mix and solidification technology, we transform soft ground into strong and stable foundations.</p>
+                    <br>
+                    <p>In collaboration with <span class="highlight">Zhongneng Green Bay (Zhejiang)</span>, we bring cutting-edge green engineering from China to Malaysia, providing a new dimension in geotechnical treatment that is superior to conventional methods.</p>
+                    
+                    <div class="vision-mission-box">
+                        <h3>Our Vision</h3>
+                        <p>To be Malaysia's leading provider of sustainable soil and road infrastructure solutions.</p>
+                        <br>
+                        <h3>Our Mission</h3>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Transform soft soils into stable foundations.</li>
+                            <li><i class="fa-solid fa-check"></i> Deliver fast & cost-effective solutions.</li>
+                            <li><i class="fa-solid fa-check"></i> Minimize environmental impact.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-img">
+                    <!-- Placeholder for the Excavator/Team image -->
+                    <img src="https://placehold.co/600x400/0E3C7E/FFFFFF?text=Geoterra+Excavator+Site" alt="Geoterra Construction Site">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="section-padding tech-section">
+        <div class="container">
+            <h2>Shallow In-situ Soil-mix Solidification</h2>
+            <p class="subtitle">An intelligent geotechnical method applying stabilizing agents directly to soft soils to form a hard semi-rigid crust.</p>
+            
+            <div class="tech-grid">
+                <!-- Card 1 -->
+                <div class="tech-card">
+                    <i class="fa-solid fa-gears"></i>
+                    <h3>Intelligent Equipment</h3>
+                    <p>Proprietary "Power Mix Head" with 50-120 RPM and twin-hose detachable mixing. Integrated with a smart dosing control console for scientific quantification.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="tech-card">
+                    <i class="fa-solid fa-flask"></i>
+                    <h3>Custom Stabilizing Agents</h3>
+                    <p>Composite mineral-based cementitious materials (Cement, GGBS, Gypsum) mixed with special additives to turn hydrophilic soil into hydrophobic foundations.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="tech-card">
+                    <i class="fa-solid fa-tachograph-digital"></i>
+                    <h3>High Performance</h3>
+                    <ul>
+                        <li>Treatment Depth: 0 ~ 5 meters</li>
+                        <li>Productivity: 1,000 m³ / day / set</li>
+                        <li>High Bearing Capacity (CBR > 25%)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section id="advantages" class="section-padding advantages">
+        <div class="container">
+            <h2>Why Choose Geoterra?</h2>
+            <div class="adv-grid">
+                <!-- Adv 1 -->
+                <div class="adv-item">
+                    <div class="adv-icon"><i class="fa-solid fa-leaf"></i></div>
+                    <h3>Eco-Friendly</h3>
+                    <p>No excavation and removal of unsuitable soil. Reduces carbon emissions by eliminating transport of disposal materials.</p>
+                </div>
+                <!-- Adv 2 -->
+                <div class="adv-item">
+                    <div class="adv-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>High Efficiency</h3>
+                    <p>No surcharge preloading required. No long settlement waiting periods. Hardened crust forms the next day.</p>
+                </div>
+                <!-- Adv 3 -->
+                <div class="adv-item">
+                    <div class="adv-icon"><i class="fa-solid fa-wallet"></i></div>
+                    <h3>Cost Saving</h3>
+                    <p>Saves costs on excavation, replacement materials (sand), and disposal fees. Reduces overall project timeline.</p>
+                </div>
+                <!-- Adv 4 -->
+                <div class="adv-item">
+                    <div class="adv-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3>Wide Application</h3>
+                    <p>Effective on Muck, Soft Clay, Coastal Mud, and Swampy Ground. Stabilizers are custom-made for soil types.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="section-padding comparison">
+        <div class="container comp-container">
+            <div class="comp-header">
+                <h2>Project Duration Comparison</h2>
+                <p>Scenario: 100m x 28m Embankment</p>
+            </div>
+            
+            <div class="comp-visual">
+                <div class="timeline-bar">
+                    <div class="timeline-label">
+                        <span>Conventional Method (PVD + Preloading)</span>
+                        <span>Very Long Duration</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div class="bar-fill bar-conventional">Includes 3-6 Months Resting Period</div>
+                    </div>
+                </div>
+
+                <div class="timeline-bar">
+                    <div class="timeline-label">
+                        <span>Geoterra Soil-Mix Method</span>
+                        <span>Fast Track</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div class="bar-fill bar-geoterra">No Resting Period</div>
+                    </div>
+                </div>
+
+                <div class="saving-badge">
+                    <i class="fa-solid fa-clock"></i> Estimated Time Saving: 10 Months
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding projects">
+        <div class="container">
+            <h2>Proven Track Record (China)</h2>
+            <div class="project-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://placehold.co/600x400/555/FFF?text=Jinshan+Expressway" alt="Jinshan Expressway">
+                    </div>
+                    <div class="project-info">
+                        <h3>Jinshan Expressway, Wuhan</h3>
+                        <p>Treatment of massive unsuitable soft ground for highway construction. Prevented pollution and wastage.</p>
+                        <span class="data-tag">Vol: 292,000 m³</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://placehold.co/600x400/555/FFF?text=Hangzhou+Steel+Project" alt="Hangzhou Steel">
+                    </div>
+                    <div class="project-info">
+                        <h3>Hangzhou Steel Intelligent Centre</h3>
+                        <p>Located at coastal mudflat with high water content. Successfully solidified for manufacturing centre foundation.</p>
+                        <span class="data-tag">Vol: 600,000 m³</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://placehold.co/600x400/555/FFF?text=Yuhuan+Highway" alt="Yuhuan Highway">
+                    </div>
+                    <div class="project-info">
+                        <h3>Yuhuan S226 Provincial Highway</h3>
+                        <p>Urban connection line project. Applied methodology for sludge treatment and ground improvement.</p>
+                        <span class="data-tag">Vol: 396,000 m³</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>GEOTERRA SOLUTIONS SDN BHD</h4>
+                    <p>Solid Foundations, Smarter Roads.</p>
+                    <br>
+                    <div class="partners">
+                        <div class="partner-logo-box">GEOTERRA</div>
+                        <div class="partner-logo-box">ZHONGNENG</div>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-globe"></i> www.geoterra.com.my</li>
+                        <li><i class="fa-solid fa-location-dot"></i> Malaysia</li>
+                        <!-- Add generic placeholders for missing PDF info -->
+                        <li><i class="fa-solid fa-envelope"></i> info@geoterra.com.my</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><i class="fa-solid fa-angle-right"></i> Soft Soil Stabilization</li>
+                        <li><i class="fa-solid fa-angle-right"></i> In-situ Solidification</li>
+                        <li><i class="fa-solid fa-angle-right"></i> Road Embankment Treatment</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Geoterra Solutions Sdn Bhd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
