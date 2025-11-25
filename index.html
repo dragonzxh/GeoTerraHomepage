@@ -377,6 +377,68 @@
         .footer-info h4 { font-size: 1.2rem; margin-bottom: 20px; }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.9rem; color: #ccc; }
 
+        /* --- IMAGE LIGHTBOX --- */
+        .image-clickable {
+            cursor: pointer;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .image-clickable:hover {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            margin: auto;
+            animation: zoomIn 0.3s;
+        }
+        .lightbox-content img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10001;
+            transition: transform 0.3s ease;
+        }
+        .lightbox-close:hover {
+            transform: rotate(90deg);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
         /* Mobile */
         @media (max-width: 768px) {
             /* Header */
@@ -448,6 +510,10 @@
             
             /* Container padding */
             .container { padding: 0 15px; }
+            
+            /* Lightbox mobile */
+            .lightbox-close { top: 10px; right: 20px; font-size: 30px; }
+            .lightbox-content { max-width: 95%; max-height: 85%; }
         }
         
         /* Small Mobile */
@@ -538,7 +604,7 @@
                 </div>
                 <div class="intro-img">
                     <!-- Image from PPT Page 2 or 10 -->
-                    <img src="images/intro-excavator.jpg" alt="Excavator performing in-situ solidification" style="border-radius: 8px;">
+                    <img src="images/intro-excavator.jpg" alt="Excavator performing in-situ solidification" class="image-clickable" style="border-radius: 8px;" data-lightbox="images/intro-excavator.jpg">
                 </div>
             </div>
         </div>
@@ -553,7 +619,7 @@
             <div class="tech-showcase">
                 <div class="tech-img-box">
                     <!-- Image from PPT Page 14 (Green mixing head) -->
-                    <img src="images/tech-head.jpg" alt="Power Mix Head">
+                    <img src="images/tech-head.jpg" alt="Power Mix Head" class="image-clickable" data-lightbox="images/tech-head.jpg">
                 </div>
                 <div class="tech-details">
                     <h3>The Power Mix Head</h3>
@@ -575,7 +641,7 @@
             <div class="tech-showcase" style="direction: rtl;"> <!-- Reverse layout -->
                 <div class="tech-img-box">
                     <!-- Image from PPT Page 12 (Silos) -->
-                    <img src="images/tech-silo.jpg" alt="Smart Control Silos">
+                    <img src="images/tech-silo.jpg" alt="Smart Control Silos" class="image-clickable" data-lightbox="images/tech-silo.jpg">
                 </div>
                 <div class="tech-details" style="direction: ltr; text-align: left;">
                     <h3>Intelligent Control System</h3>
@@ -639,7 +705,7 @@
                 </div>
                 <div class="img">
                     <!-- Image from PPT Page 21 or 22 -->
-                    <img src="images/test-cbr.jpg" alt="CBR Test Report" style="border: 1px solid #eee; padding: 10px;">
+                    <img src="images/test-cbr.jpg" alt="CBR Test Report" class="image-clickable" style="border: 1px solid #eee; padding: 10px;" data-lightbox="images/test-cbr.jpg">
                 </div>
             </div>
 
@@ -675,7 +741,7 @@
 
                 <!-- Image from PPT Page 27 (The Excel/Chart Screenshot) -->
                 <!-- If you don't have this image, delete this img tag and the CSS Chart from previous code will be needed -->
-                <img src="images/chart-comparison.jpg" alt="Timeline Comparison Chart" class="compare-img" style="margin-top: 40px;">
+                <img src="images/chart-comparison.jpg" alt="Timeline Comparison Chart" class="compare-img image-clickable" style="margin-top: 40px;" data-lightbox="images/chart-comparison.jpg">
             </div>
         </div>
     </section>
@@ -692,7 +758,7 @@
                 <!-- Project 1 -->
                 <div class="project-card">
                     <!-- Image from PPT Page 28 -->
-                    <img src="images/project-wuhan.jpg" alt="Wuhan Jinshan Expressway">
+                    <img src="images/project-wuhan.jpg" alt="Wuhan Jinshan Expressway" class="image-clickable" data-lightbox="images/project-wuhan.jpg">
                     <div class="project-info">
                         <h3>Jinshan Expressway, Wuhan</h3>
                         <p>Treated 292,000 m³ of unsuitable soft ground for a 5.98km highway. Resolved environmental pollution concerns.</p>
@@ -703,7 +769,7 @@
                 <!-- Project 2 -->
                 <div class="project-card">
                     <!-- Image from PPT Page 29 -->
-                    <img src="images/project-hangzhou.jpg" alt="Hangzhou Steel Project">
+                    <img src="images/project-hangzhou.jpg" alt="Hangzhou Steel Project" class="image-clickable" data-lightbox="images/project-hangzhou.jpg">
                     <div class="project-info">
                         <h3>Hangzhou Steel (Yuhuan) Centre</h3>
                         <p>Located on a coastal mudflat with high water content. Solidified for an Intelligent Manufacturing Centre.</p>
@@ -714,7 +780,7 @@
                 <!-- Project 3 -->
                 <div class="project-card">
                     <!-- Image from PPT Page 30 -->
-                    <img src="images/project-yuhuan.jpg" alt="Yuhuan Highway">
+                    <img src="images/project-yuhuan.jpg" alt="Yuhuan Highway" class="image-clickable" data-lightbox="images/project-yuhuan.jpg">
                     <div class="project-info">
                         <h3>Yuhuan S226 Provincial Highway</h3>
                         <p>Applied In-situ Solidification Methodology for sludge treatment on the Urban Connection Line Project.</p>
@@ -745,6 +811,14 @@
             </div>
         </div>
     </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+    </div>
 
     <script>
         // Mobile Menu Toggle
@@ -789,6 +863,46 @@
                     }
                 }
             });
+        });
+
+        // Image Lightbox Functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.querySelector('.lightbox-close');
+        const clickableImages = document.querySelectorAll('.image-clickable');
+
+        // Open lightbox when clicking on an image
+        clickableImages.forEach(img => {
+            img.addEventListener('click', function() {
+                const imgSrc = this.getAttribute('data-lightbox') || this.getAttribute('src');
+                const imgAlt = this.getAttribute('alt') || '';
+                lightboxImg.setAttribute('src', imgSrc);
+                lightboxImg.setAttribute('alt', imgAlt);
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        // Close lightbox when clicking on the background
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Close lightbox with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                closeLightbox();
+            }
         });
     </script>
 
