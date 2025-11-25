@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geoterra Solutions | Solid Foundations, Smarter Roads</title>
+    <meta name="description" content="Collaborating with Zhongneng Green Bay to provide advanced in-situ shallow soil mix and solidification technology in Malaysia.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & GLOBAL STYLES --- */
+        :root {
+            --primary-blue: #0E3C7E; /* From PPT Header */
+            --primary-green: #2E7D32; /* From PPT Logo/Eco theme */
+            --accent-light: #F5F7FA;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            font-weight: 600;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background-color: #1b5e20; transform: translateY(-2px); }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            line-height: 1.1;
+        }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-weight: 500; color: var(--primary-blue); font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--primary-green); }
+
+        /* Mobile Menu Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-blue);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Sidebar */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--white);
+            box-shadow: -2px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            padding: 80px 30px 30px;
+            overflow-y: auto;
+        }
+        .mobile-nav.active {
+            right: 0;
+        }
+        .mobile-nav ul {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .mobile-nav a {
+            display: block;
+            padding: 12px 0;
+            font-weight: 500;
+            color: var(--primary-blue);
+            font-size: 1rem;
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+        }
+        .mobile-nav a:hover {
+            color: var(--primary-green);
+            padding-left: 10px;
+        }
+        .mobile-nav a.btn {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 12px 20px;
+            border-radius: 4px;
+            text-align: center;
+            border: none;
+            margin-top: 10px;
+        }
+        .mobile-nav a.btn:hover {
+            background-color: #1b5e20;
+            padding-left: 20px;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background-color: #333;
+            background-image: linear-gradient(rgba(14, 60, 126, 0.7), rgba(14, 60, 126, 0.4)), url('images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            padding-top: 80px;
+        }
+        .hero-content { max-width: 800px; text-align: left; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { font-size: 1.3rem; margin-bottom: 40px; font-weight: 300; max-width: 700px; }
+
+        /* --- INTRO & PARTNERSHIP --- */
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .intro-text h2 { color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 20px; }
+        .highlight-box {
+            background: #f0f7f1;
+            border-left: 4px solid var(--primary-green);
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .partner-logo {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            align-items: center;
+        }
+        .partner-name { font-weight: bold; color: var(--text-gray); }
+        .intro-img img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+        }
+        .img img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- TECH SECTION --- */
+        .tech-section { background-color: #111; color: var(--white); }
+        .tech-section h2 { text-align: center; margin-bottom: 60px; font-size: 2.5rem; }
+        
+        .tech-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        .tech-img-box { position: relative; }
+        .tech-img-box img { 
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px; 
+            border: 1px solid #333; 
+        }
+        
+        .tech-details h3 { color: var(--primary-green); margin-bottom: 15px; font-size: 1.5rem; }
+        .tech-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+        .feature-item { background: #222; padding: 20px; border-radius: 6px; }
+        .feature-item h4 { color: var(--primary-blue); color: #4da3ff; margin-bottom: 8px; }
+
+        /* --- ADVANTAGES --- */
+        .advantages { background-color: var(--accent-light); text-align: center; }
+        .adv-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
+        .adv-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+        .adv-card:hover { transform: translateY(-10px); }
+        .adv-icon { font-size: 2.5rem; color: var(--primary-green); margin-bottom: 20px; }
+        .adv-card h3 { color: var(--primary-blue); margin-bottom: 15px; }
+
+        /* --- VERIFICATION & COMPARISON --- */
+        .verification { background: var(--white); }
+        .compare-box { margin-top: 60px; text-align: center; }
+        .compare-img {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        /* --- COMPARISON CHART --- */
+        .comp-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .comp-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .comp-header h2 {
+            color: var(--primary-blue);
+        }
+        .comp-visual {
+            width: 100%;
+            max-width: 900px;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            margin: 0 auto;
+        }
+        .timeline-bar {
+            margin-bottom: 25px;
+        }
+        .timeline-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .bar-bg {
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        .bar-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .bar-conventional {
+            width: 100%;
+            background-color: #d32f2f;
+        }
+        .bar-geoterra {
+            width: 40%;
+            background-color: var(--primary-green);
+            animation: growBar 2s ease-out;
+        }
+        @keyframes growBar {
+            from { width: 0; }
+            to { width: 40%; }
+        }
+        .saving-badge {
+            margin-top: 20px;
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ffeeba;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* --- PROJECTS --- */
+        .projects { background-color: #F8F9FA; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { color: var(--primary-blue); font-size: 2.5rem; }
+        
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+        .project-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .project-card img { 
+            width: 100%; 
+            height: 500px;
+            object-fit: contain; 
+            object-position: center;
+            background-color: #f5f5f5;
+            display: block;
+        }
+        .project-info { padding: 25px; }
+        .project-info h3 { color: var(--primary-blue); margin-bottom: 10px; }
+        .project-stat { display: inline-block; background: #e3f2fd; color: #0d47a1; padding: 5px 10px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-top: 10px; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--primary-blue); color: var(--white); padding: 60px 0 20px; }
+        .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px; margin-bottom: 40px; }
+        .footer-info h4 { font-size: 1.2rem; margin-bottom: 20px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.9rem; color: #ccc; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            /* Header */
+            .logo-text { font-size: 1rem; }
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            
+            /* Hero Section */
+            .hero h1 { font-size: 2rem; line-height: 1.3; }
+            .hero p { font-size: 1rem; margin-bottom: 30px; }
+            .hero-content { padding: 0 15px; }
+            
+            /* Buttons */
+            .btn { padding: 12px 25px; font-size: 0.85rem; }
+            
+            /* Sections */
+            .section-padding { padding: 50px 0; }
+            .section-header h2 { font-size: 1.8rem; }
+            
+            /* Intro Section */
+            .intro-grid, .tech-showcase { grid-template-columns: 1fr; gap: 30px; }
+            .intro-text h2 { font-size: 1.6rem; margin-bottom: 15px; }
+            .intro-text p { font-size: 0.95rem; }
+            .intro-text h3 { font-size: 1.3rem; }
+            .highlight-box { padding: 15px; font-size: 0.9rem; }
+            
+            /* Tech Section */
+            .tech-section h2 { font-size: 1.8rem; margin-bottom: 40px; }
+            .tech-details h3 { font-size: 1.3rem; margin-bottom: 12px; }
+            .tech-details p { font-size: 0.95rem; }
+            .feature-item { padding: 15px; }
+            .feature-item h4 { font-size: 1rem; }
+            .feature-item p { font-size: 0.9rem; }
+            
+            /* Advantages Section */
+            .advantages h2 { font-size: 1.8rem; }
+            .adv-cards { grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
+            .adv-card { padding: 30px 20px; }
+            .adv-icon { font-size: 2rem; margin-bottom: 15px; }
+            .adv-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
+            .adv-card p { font-size: 0.9rem; }
+            
+            /* Verification Section */
+            .verification h2 { font-size: 1.8rem; }
+            .verification h3 { font-size: 1.3rem; }
+            .verification p { font-size: 0.95rem; }
+            .verification ul li { font-size: 0.9rem; }
+            .compare-box h3 { font-size: 1.3rem; }
+            .compare-box p { font-size: 0.95rem; }
+            .comp-visual { padding: 20px; }
+            .timeline-label { font-size: 0.9rem; flex-direction: column; gap: 5px; }
+            .timeline-label span:first-child { font-size: 0.85rem; }
+            .timeline-label span:last-child { font-size: 0.8rem; }
+            .bar-fill { font-size: 0.75rem; padding-right: 10px; }
+            .saving-badge { font-size: 1rem; padding: 12px; }
+            
+            /* Projects Section */
+            .projects h2 { font-size: 1.8rem; }
+            .project-grid { grid-template-columns: 1fr; gap: 20px; }
+            .project-info h3 { font-size: 1.2rem; }
+            .project-info p { font-size: 0.9rem; }
+            .project-stat { font-size: 0.8rem; }
+            
+            /* Footer */
+            .footer-content { flex-direction: column; gap: 30px; }
+            .footer-info h4 { font-size: 1.1rem; margin-bottom: 15px; }
+            .footer-info p { font-size: 0.9rem; }
+            .footer-bottom { font-size: 0.85rem; }
+            
+            /* Container padding */
+            .container { padding: 0 15px; }
+        }
+        
+        /* Small Mobile */
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.75rem; }
+            .hero p { font-size: 0.95rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .intro-text h2 { font-size: 1.4rem; }
+            .tech-section h2 { font-size: 1.5rem; }
+            .advantages h2 { font-size: 1.5rem; }
+            .verification h2 { font-size: 1.5rem; }
+            .projects h2 { font-size: 1.5rem; }
+            .comp-visual { padding: 15px; }
+            .timeline-label span { font-size: 0.8rem; }
+            .bar-fill { font-size: 0.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <!-- Text Logo -->
+                    <div class="logo-text">
+                        GEOTERRA SOLUTIONS<br>SDN BHD
+                    </div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#tech">Technology</a></li>
+                    <li><a href="#comparison">Time Comparison</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact" class="btn">Contact</a></li>
+                </ul>
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Sidebar -->
+    <div class="overlay" id="overlay"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#tech">Technology</a></li>
+            <li><a href="#comparison">Time Comparison</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact" class="btn">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1>Solid Foundations,<br>Smarter Roads.</h1>
+            <p>Transforming soft ground into strong foundations with advanced In-situ Solidification Technology. Faster, greener, and cost-effective.</p>
+            <a href="#tech" class="btn">Learn How It Works</a>
+        </div>
+    </section>
+
+    <!-- About / Intro Section -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <h2>Company Profile</h2>
+                    <p>Geoterra Solutions Sdn Bhd strives to provide a new dimension in geotechnical treatment service with technology transfer from China specialists. We provide a faster and greener alternative to conventional geotechnical treatment in Malaysia.</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>Collaboration:</strong> We partner with <strong>Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd.</strong> to implement advanced in-situ soil-mix technology.</p>
+                    </div>
+
+                    <h3>Mission & Vision</h3>
+                    <ul style="margin-top: 15px; list-style: disc; padding-left: 20px;">
+                        <li>Transform soft soils into stable foundations.</li>
+                        <li>Deliver fast, cost-effective infrastructure solutions.</li>
+                        <li>Minimize environmental impact through on-site treatment.</li>
+                    </ul>
+                </div>
+                <div class="intro-img">
+                    <!-- Image from PPT Page 2 or 10 -->
+                    <img src="images/intro-excavator.jpg" alt="Excavator performing in-situ solidification" style="border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="tech" class="section-padding tech-section">
+        <div class="container">
+            <h2>Methodology & Technology</h2>
+            
+            <!-- Tech Block 1: The Head -->
+            <div class="tech-showcase">
+                <div class="tech-img-box">
+                    <!-- Image from PPT Page 14 (Green mixing head) -->
+                    <img src="images/tech-head.jpg" alt="Power Mix Head">
+                </div>
+                <div class="tech-details">
+                    <h3>The Power Mix Head</h3>
+                    <p>An intelligent and powerful mixing head designed to inject stabilizing agents directly into soft soils (muck, clay, swampy ground). It mixes the soil on the spot to form a semi-rigid strong layer.</p>
+                    <div class="tech-features">
+                        <div class="feature-item">
+                            <h4>RPM Speed</h4>
+                            <p>50 - 120 RPM High Power Mixing</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Productivity</h4>
+                            <p>1,000 m³ / day / set up</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Block 2: Intelligent System -->
+            <div class="tech-showcase" style="direction: rtl;"> <!-- Reverse layout -->
+                <div class="tech-img-box">
+                    <!-- Image from PPT Page 12 (Silos) -->
+                    <img src="images/tech-silo.jpg" alt="Smart Control Silos">
+                </div>
+                <div class="tech-details" style="direction: ltr; text-align: left;">
+                    <h3>Intelligent Control System</h3>
+                    <p>Zhongneng has independently developed a set of intelligent, digitalized, and highly efficient equipment. The system features automated dosing, scientific quantification, and "One-button stop" management.</p>
+                    <div class="tech-features">
+                        <div class="feature-item">
+                            <h4>Stabilizing Agents</h4>
+                            <p>Cement, Fly Ash, GGBS & Special Additives</p>
+                        </div>
+                        <div class="feature-item">
+                            <h4>Treatment Depth</h4>
+                            <p>Standard operation: 0 ~ 5 meters</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="section-padding advantages">
+        <div class="container">
+            <h2 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 2.5rem;">Why Choose In-Situ Solidification?</h2>
+            <div class="adv-cards">
+                <div class="adv-card">
+                    <i class="fa-solid fa-leaf adv-icon"></i>
+                    <h3>Eco-Friendly</h3>
+                    <p>No excavation and removal of unsuitable soil. Prevents pollution and saves energy by eliminating disposal transportation.</p>
+                </div>
+                <div class="adv-card">
+                    <i class="fa-solid fa-clock adv-icon"></i>
+                    <h3>High Efficiency</h3>
+                    <p>No surcharge preloading. No long settlement waiting period. Hardened crust forms the next day.</p>
+                </div>
+                <div class="adv-card">
+                    <i class="fa-solid fa-money-bill-wave adv-icon"></i>
+                    <h3>Cost Saving</h3>
+                    <p>Save costs on excavation, sand replacement, and disposal fees. Reduces construction timeline significantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality & Comparison Section -->
+    <section class="section-padding verification">
+        <div class="container">
+            <div class="section-header">
+                <h2>Verified Quality & Time Savings</h2>
+                <p>We use rigorous testing (SCPT, DCPT, Plate Bearing, CBR) to ensure soil strength.</p>
+            </div>
+
+            <div class="intro-grid">
+                <div class="text">
+                    <h3>Laboratory & Field Testing</h3>
+                    <p>Our treated soil achieves high bearing capacity verified by lab reports and field tests.</p>
+                    <ul style="margin-top:20px;">
+                        <li><strong><i class="fa-solid fa-check"></i> Soaked CBR:</strong> > 25% (Example: 26.8%)</li>
+                        <li><strong><i class="fa-solid fa-check"></i> Bearing Capacity:</strong> Sufficient for heavy machinery movement the next day.</li>
+                        <li><strong><i class="fa-solid fa-check"></i> Curing Period:</strong> Max 28 days for full strength.</li>
+                    </ul>
+                </div>
+                <div class="img">
+                    <!-- Image from PPT Page 21 or 22 -->
+                    <img src="images/test-cbr.jpg" alt="CBR Test Report" style="border: 1px solid #eee; padding: 10px;">
+                </div>
+            </div>
+
+            <div id="comparison" class="compare-box">
+                <h3>Time Comparison: Conventional vs. Geoterra</h3>
+                <p style="margin-bottom: 20px;">Save up to <strong>10 Months</strong> on a typical embankment project.</p>
+                
+                <div class="comp-visual" style="margin-top: 40px;">
+                    <div class="timeline-bar">
+                        <div class="timeline-label">
+                            <span>Conventional Method (PVD + Preloading)</span>
+                            <span>Very Long Duration</span>
+                        </div>
+                        <div class="bar-bg">
+                            <div class="bar-fill bar-conventional">Includes 3-6 Months Resting Period</div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-bar">
+                        <div class="timeline-label">
+                            <span>Geoterra Soil-Mix Method</span>
+                            <span>Fast Track</span>
+                        </div>
+                        <div class="bar-bg">
+                            <div class="bar-fill bar-geoterra">No Resting Period</div>
+                        </div>
+                    </div>
+
+                    <div class="saving-badge">
+                        <i class="fa-solid fa-clock"></i> Estimated Time Saving: 10 Months
+                    </div>
+                </div>
+
+                <!-- Image from PPT Page 27 (The Excel/Chart Screenshot) -->
+                <!-- If you don't have this image, delete this img tag and the CSS Chart from previous code will be needed -->
+                <img src="images/chart-comparison.jpg" alt="Timeline Comparison Chart" class="compare-img" style="margin-top: 40px;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section-padding projects">
+        <div class="container">
+            <div class="section-header">
+                <h2>Completed Projects (China)</h2>
+                <p>Proven success in treating massive volumes of soft ground.</p>
+            </div>
+            
+            <div class="project-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <!-- Image from PPT Page 28 -->
+                    <img src="images/project-wuhan.jpg" alt="Wuhan Jinshan Expressway">
+                    <div class="project-info">
+                        <h3>Jinshan Expressway, Wuhan</h3>
+                        <p>Treated 292,000 m³ of unsuitable soft ground for a 5.98km highway. Resolved environmental pollution concerns.</p>
+                        <span class="project-stat">Vol: 292,000 m³</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <!-- Image from PPT Page 29 -->
+                    <img src="images/project-hangzhou.jpg" alt="Hangzhou Steel Project">
+                    <div class="project-info">
+                        <h3>Hangzhou Steel (Yuhuan) Centre</h3>
+                        <p>Located on a coastal mudflat with high water content. Solidified for an Intelligent Manufacturing Centre.</p>
+                        <span class="project-stat">Vol: 600,000 m³</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card">
+                    <!-- Image from PPT Page 30 -->
+                    <img src="images/project-yuhuan.jpg" alt="Yuhuan Highway">
+                    <div class="project-info">
+                        <h3>Yuhuan S226 Provincial Highway</h3>
+                        <p>Applied In-situ Solidification Methodology for sludge treatment on the Urban Connection Line Project.</p>
+                        <span class="project-stat">Vol: 396,000 m³</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h4>GEOTERRA SOLUTIONS SDN BHD</h4>
+                    <p>Solid Foundations, Smarter Roads.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">In collaboration with Zhongneng Green Bay (Zhejiang)</p>
+                </div>
+                <div class="footer-info">
+                    <h4>Contact Us</h4>
+                    <p><i class="fa-solid fa-globe"></i> www.geoterra.com.my</p>
+                    <p><i class="fa-solid fa-location-dot"></i> Malaysia</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 Geoterra Solutions Sdn Bhd. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const overlay = document.getElementById('overlay');
+        const mobileNavLinks = mobileNav.querySelectorAll('a');
+
+        function toggleMenu() {
+            menuToggle.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on a link
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMenu();
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        const headerOffset = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
