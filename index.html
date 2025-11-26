@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geoterra Solutions | Solid Foundations, Smarter Roads</title>
-    <meta name="description" content="Collaborating with Zhongneng Green Bay to provide advanced in-situ shallow soil mix and solidification technology in Malaysia.">
+    <title id="pageTitle">Geoterra Solutions | Solid Foundations, Smarter Roads</title>
+    <meta name="description" id="pageDescription" content="Collaborating with Zhongneng Green Bay to provide advanced in-situ shallow soil mix and solidification technology in Malaysia.">
     
     <!-- Favicon -->
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -87,9 +87,77 @@
             color: var(--primary-blue);
             line-height: 1.1;
         }
-        .nav-links { display: flex; gap: 30px; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-links a { font-weight: 500; color: var(--primary-blue); font-size: 0.95rem; }
         .nav-links a:hover { color: var(--primary-green); }
+        
+        /* Language Selector */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 2px solid var(--primary-blue);
+            color: var(--primary-blue);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+        .lang-btn:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+        .lang-btn i {
+            font-size: 0.85rem;
+        }
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 5px;
+            background: var(--white);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 150px;
+            display: none;
+            z-index: 1002;
+        }
+        .lang-dropdown.active {
+            display: block;
+        }
+        .lang-option {
+            padding: 12px 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-dark);
+        }
+        .lang-option:hover {
+            background: var(--accent-light);
+            color: var(--primary-blue);
+        }
+        .lang-option.active {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+        .lang-option:first-child {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+        .lang-option:last-child {
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
 
         /* Mobile Menu Button */
         .menu-toggle {
@@ -163,6 +231,19 @@
         .mobile-nav a.btn:hover {
             background-color: #1b5e20;
             padding-left: 20px;
+        }
+        .mobile-nav .language-selector {
+            margin-top: 20px;
+        }
+        .mobile-nav .lang-btn {
+            width: 100%;
+            justify-content: center;
+        }
+        .mobile-nav .lang-dropdown {
+            position: relative;
+            margin-top: 10px;
+            box-shadow: none;
+            border: none;
         }
         .overlay {
             display: none;
@@ -445,6 +526,9 @@
             .logo-text { font-size: 1rem; }
             .nav-links { display: none; }
             .menu-toggle { display: flex; }
+            .language-selector {
+                margin: 15px 0;
+            }
             
             /* Hero Section */
             .hero h1 { font-size: 2rem; line-height: 1.3; }
@@ -545,12 +629,35 @@
                     </div>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#tech">Technology</a></li>
-                    <li><a href="#comparison">Time Comparison</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact" class="btn">Contact</a></li>
+                    <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                    <li><a href="#about" data-i18n="nav.about">About</a></li>
+                    <li><a href="#tech" data-i18n="nav.tech">Technology</a></li>
+                    <li><a href="#comparison" data-i18n="nav.comparison">Time Comparison</a></li>
+                    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+                    <li><a href="#contact" class="btn" data-i18n="nav.contact">Contact</a></li>
+                    <li>
+                        <div class="language-selector">
+                            <button class="lang-btn" id="langBtn">
+                                <i class="fa-solid fa-globe"></i>
+                                <span id="currentLang">EN</span>
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <div class="lang-dropdown" id="langDropdown">
+                                <div class="lang-option active" data-lang="en">
+                                    <span>🇬🇧</span>
+                                    <span>English</span>
+                                </div>
+                                <div class="lang-option" data-lang="ms">
+                                    <span>🇲🇾</span>
+                                    <span>Bahasa Malaysia</span>
+                                </div>
+                                <div class="lang-option" data-lang="zh">
+                                    <span>🇨🇳</span>
+                                    <span>中文</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
                 <div class="menu-toggle" id="menuToggle">
                     <span></span>
@@ -565,21 +672,44 @@
     <div class="overlay" id="overlay"></div>
     <nav class="mobile-nav" id="mobileNav">
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#tech">Technology</a></li>
-            <li><a href="#comparison">Time Comparison</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact" class="btn">Contact</a></li>
+            <li><a href="#home" data-i18n="nav.home">Home</a></li>
+            <li><a href="#about" data-i18n="nav.about">About</a></li>
+            <li><a href="#tech" data-i18n="nav.tech">Technology</a></li>
+            <li><a href="#comparison" data-i18n="nav.comparison">Time Comparison</a></li>
+            <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="#contact" class="btn" data-i18n="nav.contact">Contact</a></li>
+            <li>
+                <div class="language-selector">
+                    <button class="lang-btn" id="langBtnMobile">
+                        <i class="fa-solid fa-globe"></i>
+                        <span id="currentLangMobile">EN</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdownMobile">
+                        <div class="lang-option active" data-lang="en">
+                            <span>🇬🇧</span>
+                            <span>English</span>
+                        </div>
+                        <div class="lang-option" data-lang="ms">
+                            <span>🇲🇾</span>
+                            <span>Bahasa Malaysia</span>
+                        </div>
+                        <div class="lang-option" data-lang="zh">
+                            <span>🇨🇳</span>
+                            <span>中文</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container hero-content">
-            <h1>Solid Foundations,<br>Smarter Roads.</h1>
-            <p>Transforming soft ground into strong foundations with advanced In-situ Solidification Technology. Faster, greener, and cost-effective.</p>
-            <a href="#tech" class="btn">Learn How It Works</a>
+            <h1 data-i18n="hero.title">Solid Foundations,<br>Smarter Roads.</h1>
+            <p data-i18n="hero.subtitle">Transforming soft ground into strong foundations with advanced In-situ Solidification Technology. Faster, greener, and cost-effective.</p>
+            <a href="#tech" class="btn" data-i18n="hero.button">Learn How It Works</a>
         </div>
     </section>
 
@@ -588,18 +718,18 @@
         <div class="container">
             <div class="intro-grid">
                 <div class="intro-text">
-                    <h2>Company Profile</h2>
-                    <p>Geoterra Solutions Sdn Bhd strives to provide a new dimension in geotechnical treatment service with technology transfer from China specialists. We provide a faster and greener alternative to conventional geotechnical treatment in Malaysia.</p>
+                    <h2 data-i18n="about.title">Company Profile</h2>
+                    <p data-i18n="about.description">Geoterra Solutions Sdn Bhd strives to provide a new dimension in geotechnical treatment service with technology transfer from China specialists. We provide a faster and greener alternative to conventional geotechnical treatment in Malaysia.</p>
                     
                     <div class="highlight-box">
-                        <p><strong>Collaboration:</strong> We partner with <strong>Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd.</strong> to implement advanced in-situ soil-mix technology.</p>
+                        <p data-i18n="about.collaboration"><strong>Collaboration:</strong> We partner with <strong>Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd.</strong> to implement advanced in-situ soil-mix technology.</p>
                     </div>
 
-                    <h3>Mission & Vision</h3>
+                    <h3 data-i18n="about.missionTitle">Mission & Vision</h3>
                     <ul style="margin-top: 15px; list-style: disc; padding-left: 20px;">
-                        <li>Transform soft soils into stable foundations.</li>
-                        <li>Deliver fast, cost-effective infrastructure solutions.</li>
-                        <li>Minimize environmental impact through on-site treatment.</li>
+                        <li data-i18n="about.mission1">Transform soft soils into stable foundations.</li>
+                        <li data-i18n="about.mission2">Deliver fast, cost-effective infrastructure solutions.</li>
+                        <li data-i18n="about.mission3">Minimize environmental impact through on-site treatment.</li>
                     </ul>
                 </div>
                 <div class="intro-img">
@@ -613,7 +743,7 @@
     <!-- Technology Section -->
     <section id="tech" class="section-padding tech-section">
         <div class="container">
-            <h2>Methodology & Technology</h2>
+            <h2 data-i18n="tech.title">Methodology & Technology</h2>
             
             <!-- Tech Block 1: The Head -->
             <div class="tech-showcase">
@@ -622,16 +752,16 @@
                     <img src="images/tech-head.jpg" alt="Power Mix Head" class="image-clickable" data-lightbox="images/tech-head.jpg">
                 </div>
                 <div class="tech-details">
-                    <h3>The Power Mix Head</h3>
-                    <p>An intelligent and powerful mixing head designed to inject stabilizing agents directly into soft soils (muck, clay, swampy ground). It mixes the soil on the spot to form a semi-rigid strong layer.</p>
+                    <h3 data-i18n="tech.head.title">The Power Mix Head</h3>
+                    <p data-i18n="tech.head.description">An intelligent and powerful mixing head designed to inject stabilizing agents directly into soft soils (muck, clay, swampy ground). It mixes the soil on the spot to form a semi-rigid strong layer.</p>
                     <div class="tech-features">
                         <div class="feature-item">
-                            <h4>RPM Speed</h4>
-                            <p>50 - 120 RPM High Power Mixing</p>
+                            <h4 data-i18n="tech.head.rpmTitle">RPM Speed</h4>
+                            <p data-i18n="tech.head.rpmValue">50 - 120 RPM High Power Mixing</p>
                         </div>
                         <div class="feature-item">
-                            <h4>Productivity</h4>
-                            <p>1,000 m³ / day / set up</p>
+                            <h4 data-i18n="tech.head.productivityTitle">Productivity</h4>
+                            <p data-i18n="tech.head.productivityValue">1,000 m³ / day / set up</p>
                         </div>
                     </div>
                 </div>
@@ -644,16 +774,16 @@
                     <img src="images/tech-silo.jpg" alt="Smart Control Silos" class="image-clickable" data-lightbox="images/tech-silo.jpg">
                 </div>
                 <div class="tech-details" style="direction: ltr; text-align: left;">
-                    <h3>Intelligent Control System</h3>
-                    <p>Zhongneng has independently developed a set of intelligent, digitalized, and highly efficient equipment. The system features automated dosing, scientific quantification, and "One-button stop" management.</p>
+                    <h3 data-i18n="tech.system.title">Intelligent Control System</h3>
+                    <p data-i18n="tech.system.description">Zhongneng has independently developed a set of intelligent, digitalized, and highly efficient equipment. The system features automated dosing, scientific quantification, and "One-button stop" management.</p>
                     <div class="tech-features">
                         <div class="feature-item">
-                            <h4>Stabilizing Agents</h4>
-                            <p>Cement, Fly Ash, GGBS & Special Additives</p>
+                            <h4 data-i18n="tech.system.agentsTitle">Stabilizing Agents</h4>
+                            <p data-i18n="tech.system.agentsValue">Cement, Fly Ash, GGBS & Special Additives</p>
                         </div>
                         <div class="feature-item">
-                            <h4>Treatment Depth</h4>
-                            <p>Standard operation: 0 ~ 5 meters</p>
+                            <h4 data-i18n="tech.system.depthTitle">Treatment Depth</h4>
+                            <p data-i18n="tech.system.depthValue">Standard operation: 0 ~ 5 meters</p>
                         </div>
                     </div>
                 </div>
@@ -664,22 +794,22 @@
     <!-- Advantages Section -->
     <section class="section-padding advantages">
         <div class="container">
-            <h2 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 2.5rem;">Why Choose In-Situ Solidification?</h2>
+            <h2 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 2.5rem;" data-i18n="advantages.title">Why Choose In-Situ Solidification?</h2>
             <div class="adv-cards">
                 <div class="adv-card">
                     <i class="fa-solid fa-leaf adv-icon"></i>
-                    <h3>Eco-Friendly</h3>
-                    <p>No excavation and removal of unsuitable soil. Prevents pollution and saves energy by eliminating disposal transportation.</p>
+                    <h3 data-i18n="advantages.eco.title">Eco-Friendly</h3>
+                    <p data-i18n="advantages.eco.description">No excavation and removal of unsuitable soil. Prevents pollution and saves energy by eliminating disposal transportation.</p>
                 </div>
                 <div class="adv-card">
                     <i class="fa-solid fa-clock adv-icon"></i>
-                    <h3>High Efficiency</h3>
-                    <p>No surcharge preloading. No long settlement waiting period. Hardened crust forms the next day.</p>
+                    <h3 data-i18n="advantages.efficiency.title">High Efficiency</h3>
+                    <p data-i18n="advantages.efficiency.description">No surcharge preloading. No long settlement waiting period. Hardened crust forms the next day.</p>
                 </div>
                 <div class="adv-card">
                     <i class="fa-solid fa-money-bill-wave adv-icon"></i>
-                    <h3>Cost Saving</h3>
-                    <p>Save costs on excavation, sand replacement, and disposal fees. Reduces construction timeline significantly.</p>
+                    <h3 data-i18n="advantages.cost.title">Cost Saving</h3>
+                    <p data-i18n="advantages.cost.description">Save costs on excavation, sand replacement, and disposal fees. Reduces construction timeline significantly.</p>
                 </div>
             </div>
         </div>
@@ -689,18 +819,18 @@
     <section class="section-padding verification">
         <div class="container">
             <div class="section-header">
-                <h2>Verified Quality & Time Savings</h2>
-                <p>We use rigorous testing (SCPT, DCPT, Plate Bearing, CBR) to ensure soil strength.</p>
+                <h2 data-i18n="verification.title">Verified Quality & Time Savings</h2>
+                <p data-i18n="verification.subtitle">We use rigorous testing (SCPT, DCPT, Plate Bearing, CBR) to ensure soil strength.</p>
             </div>
 
             <div class="intro-grid">
                 <div class="text">
-                    <h3>Laboratory & Field Testing</h3>
-                    <p>Our treated soil achieves high bearing capacity verified by lab reports and field tests.</p>
+                    <h3 data-i18n="verification.testing.title">Laboratory & Field Testing</h3>
+                    <p data-i18n="verification.testing.description">Our treated soil achieves high bearing capacity verified by lab reports and field tests.</p>
                     <ul style="margin-top:20px;">
-                        <li><strong><i class="fa-solid fa-check"></i> Soaked CBR:</strong> > 25% (Example: 26.8%)</li>
-                        <li><strong><i class="fa-solid fa-check"></i> Bearing Capacity:</strong> Sufficient for heavy machinery movement the next day.</li>
-                        <li><strong><i class="fa-solid fa-check"></i> Curing Period:</strong> Max 28 days for full strength.</li>
+                        <li data-i18n="verification.testing.cbr"><strong><i class="fa-solid fa-check"></i> Soaked CBR:</strong> > 25% (Example: 26.8%)</li>
+                        <li data-i18n="verification.testing.bearing"><strong><i class="fa-solid fa-check"></i> Bearing Capacity:</strong> Sufficient for heavy machinery movement the next day.</li>
+                        <li data-i18n="verification.testing.curing"><strong><i class="fa-solid fa-check"></i> Curing Period:</strong> Max 28 days for full strength.</li>
                     </ul>
                 </div>
                 <div class="img">
@@ -710,32 +840,32 @@
             </div>
 
             <div id="comparison" class="compare-box">
-                <h3>Time Comparison: Conventional vs. Geoterra</h3>
-                <p style="margin-bottom: 20px;">Save up to <strong>10 Months</strong> on a typical embankment project.</p>
+                <h3 data-i18n="comparison.title">Time Comparison: Conventional vs. Geoterra</h3>
+                <p style="margin-bottom: 20px;" data-i18n="comparison.subtitle">Save up to <strong>10 Months</strong> on a typical embankment project.</p>
                 
                 <div class="comp-visual" style="margin-top: 40px;">
                     <div class="timeline-bar">
                         <div class="timeline-label">
-                            <span>Conventional Method (PVD + Preloading)</span>
-                            <span>Very Long Duration</span>
+                            <span data-i18n="comparison.conventional.label">Conventional Method (PVD + Preloading)</span>
+                            <span data-i18n="comparison.conventional.duration">Very Long Duration</span>
                         </div>
                         <div class="bar-bg">
-                            <div class="bar-fill bar-conventional">Includes 3-6 Months Resting Period</div>
+                            <div class="bar-fill bar-conventional" data-i18n="comparison.conventional.period">Includes 3-6 Months Resting Period</div>
                         </div>
                     </div>
 
                     <div class="timeline-bar">
                         <div class="timeline-label">
-                            <span>Geoterra Soil-Mix Method</span>
-                            <span>Fast Track</span>
+                            <span data-i18n="comparison.geoterra.label">Geoterra Soil-Mix Method</span>
+                            <span data-i18n="comparison.geoterra.duration">Fast Track</span>
                         </div>
                         <div class="bar-bg">
-                            <div class="bar-fill bar-geoterra">No Resting Period</div>
+                            <div class="bar-fill bar-geoterra" data-i18n="comparison.geoterra.period">No Resting Period</div>
                         </div>
                     </div>
 
                     <div class="saving-badge">
-                        <i class="fa-solid fa-clock"></i> Estimated Time Saving: 10 Months
+                        <i class="fa-solid fa-clock"></i> <span data-i18n="comparison.saving">Estimated Time Saving: 10 Months</span>
                     </div>
                 </div>
 
@@ -750,8 +880,8 @@
     <section id="projects" class="section-padding projects">
         <div class="container">
             <div class="section-header">
-                <h2>Completed Projects (China)</h2>
-                <p>Proven success in treating massive volumes of soft ground.</p>
+                <h2 data-i18n="projects.title">Completed Projects (China)</h2>
+                <p data-i18n="projects.subtitle">Proven success in treating massive volumes of soft ground.</p>
             </div>
             
             <div class="project-grid">
@@ -760,9 +890,9 @@
                     <!-- Image from PPT Page 28 -->
                     <img src="images/project-wuhan.jpg" alt="Wuhan Jinshan Expressway" class="image-clickable" data-lightbox="images/project-wuhan.jpg">
                     <div class="project-info">
-                        <h3>Jinshan Expressway, Wuhan</h3>
-                        <p>Treated 292,000 m³ of unsuitable soft ground for a 5.98km highway. Resolved environmental pollution concerns.</p>
-                        <span class="project-stat">Vol: 292,000 m³</span>
+                        <h3 data-i18n="projects.wuhan.title">Jinshan Expressway, Wuhan</h3>
+                        <p data-i18n="projects.wuhan.description">Treated 292,000 m³ of unsuitable soft ground for a 5.98km highway. Resolved environmental pollution concerns.</p>
+                        <span class="project-stat" data-i18n="projects.wuhan.volume">Vol: 292,000 m³</span>
                     </div>
                 </div>
 
@@ -771,9 +901,9 @@
                     <!-- Image from PPT Page 29 -->
                     <img src="images/project-hangzhou.jpg" alt="Hangzhou Steel Project" class="image-clickable" data-lightbox="images/project-hangzhou.jpg">
                     <div class="project-info">
-                        <h3>Hangzhou Steel (Yuhuan) Centre</h3>
-                        <p>Located on a coastal mudflat with high water content. Solidified for an Intelligent Manufacturing Centre.</p>
-                        <span class="project-stat">Vol: 600,000 m³</span>
+                        <h3 data-i18n="projects.hangzhou.title">Hangzhou Steel (Yuhuan) Centre</h3>
+                        <p data-i18n="projects.hangzhou.description">Located on a coastal mudflat with high water content. Solidified for an Intelligent Manufacturing Centre.</p>
+                        <span class="project-stat" data-i18n="projects.hangzhou.volume">Vol: 600,000 m³</span>
                     </div>
                 </div>
 
@@ -782,9 +912,9 @@
                     <!-- Image from PPT Page 30 -->
                     <img src="images/project-yuhuan.jpg" alt="Yuhuan Highway" class="image-clickable" data-lightbox="images/project-yuhuan.jpg">
                     <div class="project-info">
-                        <h3>Yuhuan S226 Provincial Highway</h3>
-                        <p>Applied In-situ Solidification Methodology for sludge treatment on the Urban Connection Line Project.</p>
-                        <span class="project-stat">Vol: 396,000 m³</span>
+                        <h3 data-i18n="projects.yuhuan.title">Yuhuan S226 Provincial Highway</h3>
+                        <p data-i18n="projects.yuhuan.description">Applied In-situ Solidification Methodology for sludge treatment on the Urban Connection Line Project.</p>
+                        <span class="project-stat" data-i18n="projects.yuhuan.volume">Vol: 396,000 m³</span>
                     </div>
                 </div>
             </div>
@@ -797,17 +927,17 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <h4>GEOTERRA SOLUTIONS SDN BHD</h4>
-                    <p>Solid Foundations, Smarter Roads.</p>
-                    <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;">In collaboration with Zhongneng Green Bay (Zhejiang)</p>
+                    <p data-i18n="footer.tagline">Solid Foundations, Smarter Roads.</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;" data-i18n="footer.collaboration">In collaboration with Zhongneng Green Bay (Zhejiang)</p>
                 </div>
                 <div class="footer-info">
-                    <h4>Contact Us</h4>
+                    <h4 data-i18n="footer.contact">Contact Us</h4>
                     <p><i class="fa-solid fa-globe"></i> www.geoterra.com.my</p>
                     <p><i class="fa-solid fa-location-dot"></i> Malaysia</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2024 Geoterra Solutions Sdn Bhd. All Rights Reserved.
+                <span data-i18n="footer.copyright">&copy; 2024 Geoterra Solutions Sdn Bhd. All Rights Reserved.</span>
             </div>
         </div>
     </footer>
@@ -821,6 +951,459 @@
     </div>
 
     <script>
+        // ========== MULTILINGUAL SUPPORT ==========
+        const translations = {
+            en: {
+                meta: {
+                    title: "Geoterra Solutions | Solid Foundations, Smarter Roads",
+                    description: "Collaborating with Zhongneng Green Bay to provide advanced in-situ shallow soil mix and solidification technology in Malaysia."
+                },
+                nav: {
+                    home: "Home",
+                    about: "About",
+                    tech: "Technology",
+                    comparison: "Time Comparison",
+                    projects: "Projects",
+                    contact: "Contact"
+                },
+                hero: {
+                    title: "Solid Foundations,<br>Smarter Roads.",
+                    subtitle: "Transforming soft ground into strong foundations with advanced In-situ Solidification Technology. Faster, greener, and cost-effective.",
+                    button: "Learn How It Works"
+                },
+                about: {
+                    title: "Company Profile",
+                    description: "Geoterra Solutions Sdn Bhd strives to provide a new dimension in geotechnical treatment service with technology transfer from China specialists. We provide a faster and greener alternative to conventional geotechnical treatment in Malaysia.",
+                    collaboration: "<strong>Collaboration:</strong> We partner with <strong>Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd.</strong> to implement advanced in-situ soil-mix technology.",
+                    missionTitle: "Mission & Vision",
+                    mission1: "Transform soft soils into stable foundations.",
+                    mission2: "Deliver fast, cost-effective infrastructure solutions.",
+                    mission3: "Minimize environmental impact through on-site treatment."
+                },
+                tech: {
+                    title: "Methodology & Technology",
+                    head: {
+                        title: "The Power Mix Head",
+                        description: "An intelligent and powerful mixing head designed to inject stabilizing agents directly into soft soils (muck, clay, swampy ground). It mixes the soil on the spot to form a semi-rigid strong layer.",
+                        rpmTitle: "RPM Speed",
+                        rpmValue: "50 - 120 RPM High Power Mixing",
+                        productivityTitle: "Productivity",
+                        productivityValue: "1,000 m³ / day / set up"
+                    },
+                    system: {
+                        title: "Intelligent Control System",
+                        description: "Zhongneng has independently developed a set of intelligent, digitalized, and highly efficient equipment. The system features automated dosing, scientific quantification, and \"One-button stop\" management.",
+                        agentsTitle: "Stabilizing Agents",
+                        agentsValue: "Cement, Fly Ash, GGBS & Special Additives",
+                        depthTitle: "Treatment Depth",
+                        depthValue: "Standard operation: 0 ~ 5 meters"
+                    }
+                },
+                advantages: {
+                    title: "Why Choose In-Situ Solidification?",
+                    eco: {
+                        title: "Eco-Friendly",
+                        description: "No excavation and removal of unsuitable soil. Prevents pollution and saves energy by eliminating disposal transportation."
+                    },
+                    efficiency: {
+                        title: "High Efficiency",
+                        description: "No surcharge preloading. No long settlement waiting period. Hardened crust forms the next day."
+                    },
+                    cost: {
+                        title: "Cost Saving",
+                        description: "Save costs on excavation, sand replacement, and disposal fees. Reduces construction timeline significantly."
+                    }
+                },
+                verification: {
+                    title: "Verified Quality & Time Savings",
+                    subtitle: "We use rigorous testing (SCPT, DCPT, Plate Bearing, CBR) to ensure soil strength.",
+                    testing: {
+                        title: "Laboratory & Field Testing",
+                        description: "Our treated soil achieves high bearing capacity verified by lab reports and field tests.",
+                        cbr: "<strong><i class=\"fa-solid fa-check\"></i> Soaked CBR:</strong> > 25% (Example: 26.8%)",
+                        bearing: "<strong><i class=\"fa-solid fa-check\"></i> Bearing Capacity:</strong> Sufficient for heavy machinery movement the next day.",
+                        curing: "<strong><i class=\"fa-solid fa-check\"></i> Curing Period:</strong> Max 28 days for full strength."
+                    }
+                },
+                comparison: {
+                    title: "Time Comparison: Conventional vs. Geoterra",
+                    subtitle: "Save up to <strong>10 Months</strong> on a typical embankment project.",
+                    conventional: {
+                        label: "Conventional Method (PVD + Preloading)",
+                        duration: "Very Long Duration",
+                        period: "Includes 3-6 Months Resting Period"
+                    },
+                    geoterra: {
+                        label: "Geoterra Soil-Mix Method",
+                        duration: "Fast Track",
+                        period: "No Resting Period"
+                    },
+                    saving: "Estimated Time Saving: 10 Months"
+                },
+                projects: {
+                    title: "Completed Projects (China)",
+                    subtitle: "Proven success in treating massive volumes of soft ground.",
+                    wuhan: {
+                        title: "Jinshan Expressway, Wuhan",
+                        description: "Treated 292,000 m³ of unsuitable soft ground for a 5.98km highway. Resolved environmental pollution concerns.",
+                        volume: "Vol: 292,000 m³"
+                    },
+                    hangzhou: {
+                        title: "Hangzhou Steel (Yuhuan) Centre",
+                        description: "Located on a coastal mudflat with high water content. Solidified for an Intelligent Manufacturing Centre.",
+                        volume: "Vol: 600,000 m³"
+                    },
+                    yuhuan: {
+                        title: "Yuhuan S226 Provincial Highway",
+                        description: "Applied In-situ Solidification Methodology for sludge treatment on the Urban Connection Line Project.",
+                        volume: "Vol: 396,000 m³"
+                    }
+                },
+                footer: {
+                    tagline: "Solid Foundations, Smarter Roads.",
+                    collaboration: "In collaboration with Zhongneng Green Bay (Zhejiang)",
+                    contact: "Contact Us",
+                    copyright: "© 2024 Geoterra Solutions Sdn Bhd. All Rights Reserved."
+                }
+            },
+            ms: {
+                meta: {
+                    title: "Geoterra Solutions | Asas Kukuh, Jalan Lebih Pintar",
+                    description: "Bekerjasama dengan Zhongneng Green Bay untuk menyediakan teknologi campuran dan pengerasan tanah cetek in-situ yang canggih di Malaysia."
+                },
+                nav: {
+                    home: "Laman Utama",
+                    about: "Tentang",
+                    tech: "Teknologi",
+                    comparison: "Perbandingan Masa",
+                    projects: "Projek",
+                    contact: "Hubungi"
+                },
+                hero: {
+                    title: "Asas Kukuh,<br>Jalan Lebih Pintar.",
+                    subtitle: "Mengubah tanah lembut menjadi asas yang kukuh dengan Teknologi Pengerasan In-situ yang canggih. Lebih cepat, lebih mesra alam, dan menjimatkan kos.",
+                    button: "Ketahui Cara Ia Berfungsi"
+                },
+                about: {
+                    title: "Profil Syarikat",
+                    description: "Geoterra Solutions Sdn Bhd berusaha untuk menyediakan dimensi baru dalam perkhidmatan rawatan geoteknikal dengan pemindahan teknologi daripada pakar China. Kami menyediakan alternatif yang lebih cepat dan mesra alam kepada rawatan geoteknikal konvensional di Malaysia.",
+                    collaboration: "<strong>Kerjasama:</strong> Kami bekerjasama dengan <strong>Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd.</strong> untuk melaksanakan teknologi campuran tanah in-situ yang canggih.",
+                    missionTitle: "Misi & Visi",
+                    mission1: "Mengubah tanah lembut menjadi asas yang stabil.",
+                    mission2: "Menyediakan penyelesaian infrastruktur yang cepat dan menjimatkan kos.",
+                    mission3: "Mengurangkan kesan alam sekitar melalui rawatan di tapak."
+                },
+                tech: {
+                    title: "Metodologi & Teknologi",
+                    head: {
+                        title: "Kepala Campuran Berkuasa",
+                        description: "Kepala campuran yang pintar dan berkuasa direka untuk menyuntik agen penstabil terus ke dalam tanah lembut (lumpur, tanah liat, tanah paya). Ia mencampurkan tanah di tempat untuk membentuk lapisan kuat separa tegar.",
+                        rpmTitle: "Kelajuan RPM",
+                        rpmValue: "50 - 120 RPM Pencampuran Berkuasa Tinggi",
+                        productivityTitle: "Produktiviti",
+                        productivityValue: "1,000 m³ / hari / set"
+                    },
+                    system: {
+                        title: "Sistem Kawalan Pintar",
+                        description: "Zhongneng telah membangunkan secara bebas satu set peralatan yang pintar, berdigitkan, dan sangat cekap. Sistem ini mempunyai dos automatik, kuantifikasi saintifik, dan pengurusan \"Satu butang henti\".",
+                        agentsTitle: "Agen Penstabil",
+                        agentsValue: "Simen, Abu Terbang, GGBS & Aditif Khas",
+                        depthTitle: "Kedalaman Rawatan",
+                        depthValue: "Operasi standard: 0 ~ 5 meter"
+                    }
+                },
+                advantages: {
+                    title: "Mengapa Pilih Pengerasan In-situ?",
+                    eco: {
+                        title: "Mesra Alam",
+                        description: "Tiada penggalian dan penyingkiran tanah yang tidak sesuai. Mencegah pencemaran dan menjimatkan tenaga dengan menghapuskan pengangkutan pelupusan."
+                    },
+                    efficiency: {
+                        title: "Kecekapan Tinggi",
+                        description: "Tiada pra-muat tambahan. Tiada tempoh menunggu penempatan yang panjang. Kerak keras terbentuk pada hari berikutnya."
+                    },
+                    cost: {
+                        title: "Penjimatan Kos",
+                        description: "Jimat kos untuk penggalian, penggantian pasir, dan yuran pelupusan. Mengurangkan jadual pembinaan dengan ketara."
+                    }
+                },
+                verification: {
+                    title: "Kualiti Disahkan & Penjimatan Masa",
+                    subtitle: "Kami menggunakan ujian yang ketat (SCPT, DCPT, Plate Bearing, CBR) untuk memastikan kekuatan tanah.",
+                    testing: {
+                        title: "Ujian Makmal & Lapangan",
+                        description: "Tanah yang dirawat kami mencapai kapasiti galas tinggi yang disahkan oleh laporan makmal dan ujian lapangan.",
+                        cbr: "<strong><i class=\"fa-solid fa-check\"></i> CBR Rendam:</strong> > 25% (Contoh: 26.8%)",
+                        bearing: "<strong><i class=\"fa-solid fa-check\"></i> Kapasiti Galas:</strong> Mencukupi untuk pergerakan jentera berat pada hari berikutnya.",
+                        curing: "<strong><i class=\"fa-solid fa-check\"></i> Tempoh Pengerasan:</strong> Maksimum 28 hari untuk kekuatan penuh."
+                    }
+                },
+                comparison: {
+                    title: "Perbandingan Masa: Konvensional vs. Geoterra",
+                    subtitle: "Jimat sehingga <strong>10 Bulan</strong> pada projek tambak biasa.",
+                    conventional: {
+                        label: "Kaedah Konvensional (PVD + Pra-muat)",
+                        duration: "Tempoh Sangat Panjang",
+                        period: "Termasuk Tempoh Rehat 3-6 Bulan"
+                    },
+                    geoterra: {
+                        label: "Kaedah Campuran Tanah Geoterra",
+                        duration: "Laluan Pantas",
+                        period: "Tiada Tempoh Rehat"
+                    },
+                    saving: "Anggaran Penjimatan Masa: 10 Bulan"
+                },
+                projects: {
+                    title: "Projek Siap (China)",
+                    subtitle: "Kejayaan terbukti dalam merawat jumlah besar tanah lembut.",
+                    wuhan: {
+                        title: "Lebuhraya Jinshan, Wuhan",
+                        description: "Merawat 292,000 m³ tanah lembut yang tidak sesuai untuk lebuhraya 5.98km. Menyelesaikan kebimbangan pencemaran alam sekitar.",
+                        volume: "Isipadu: 292,000 m³"
+                    },
+                    hangzhou: {
+                        title: "Pusat Hangzhou Steel (Yuhuan)",
+                        description: "Terletak di dataran lumpur pantai dengan kandungan air tinggi. Dikeraskan untuk Pusat Pembuatan Pintar.",
+                        volume: "Isipadu: 600,000 m³"
+                    },
+                    yuhuan: {
+                        title: "Lebuhraya Wilayah Yuhuan S226",
+                        description: "Menggunakan Metodologi Pengerasan In-situ untuk rawatan enapcemar pada Projek Garisan Sambungan Bandar.",
+                        volume: "Isipadu: 396,000 m³"
+                    }
+                },
+                footer: {
+                    tagline: "Asas Kukuh, Jalan Lebih Pintar.",
+                    collaboration: "Bersama dengan Zhongneng Green Bay (Zhejiang)",
+                    contact: "Hubungi Kami",
+                    copyright: "© 2024 Geoterra Solutions Sdn Bhd. Hak Cipta Terpelihara."
+                }
+            },
+            zh: {
+                meta: {
+                    title: "Geoterra Solutions | 坚实基础，智慧道路",
+                    description: "与中能绿湾合作，在马来西亚提供先进的原位浅层土壤混合和固化技术。"
+                },
+                nav: {
+                    home: "首页",
+                    about: "关于",
+                    tech: "技术",
+                    comparison: "时间对比",
+                    projects: "项目",
+                    contact: "联系"
+                },
+                hero: {
+                    title: "坚实基础，<br>智慧道路。",
+                    subtitle: "采用先进的原位固化技术，将软土地基转化为坚固基础。更快、更环保、更经济。",
+                    button: "了解工作原理"
+                },
+                about: {
+                    title: "公司简介",
+                    description: "Geoterra Solutions Sdn Bhd致力于通过来自中国专家的技术，为岩土处理服务提供新维度。我们在马来西亚提供比传统岩土处理更快、更环保的替代方案。",
+                    collaboration: "<strong>合作：</strong>我们与<strong>中能绿湾（浙江）环境科技有限公司</strong>合作，实施先进的原位土壤混合固化技术。",
+                    missionTitle: "使命与愿景",
+                    mission1: "将软土转化为稳定地基。",
+                    mission2: "提供快速、经济高效的基础设施解决方案。",
+                    mission3: "通过现场处理最大程度减少环境影响。"
+                },
+                tech: {
+                    title: "方法与技术",
+                    head: {
+                        title: "强力混合搅拌头",
+                        description: "智能强大的混合搅拌头，设计用于将固化剂直接注入软土（淤泥、粘土、沼泽地）。它在现场固化土壤，形成半刚性坚固层。",
+                        rpmTitle: "转速",
+                        rpmValue: "50 - 120 RPM 高功率混合",
+                        productivityTitle: "生产力",
+                        productivityValue: "1,000 立方米 / 天 / 套"
+                    },
+                    system: {
+                        title: "智能控制系统",
+                        description: "中能独立开发了一套智能化、数字化、高效的设备。系统具有自动配比、科学量化管理和\"一键停止\"管理功能。",
+                        agentsTitle: "固化剂",
+                        agentsValue: "水泥、粉煤灰、矿渣粉及特殊添加剂",
+                        depthTitle: "处理深度",
+                        depthValue: "标准操作：0 ~ 5 米"
+                    }
+                },
+                advantages: {
+                    title: "为什么选择原位固化？",
+                    eco: {
+                        title: "环保",
+                        description: "无需开挖和移除不合适的土壤。通过消除处置运输来防止污染并节省能源。"
+                    },
+                    efficiency: {
+                        title: "高效率",
+                        description: "无需超载预压。无需长期沉降等待期。硬化表层次日即可形成。"
+                    },
+                    cost: {
+                        title: "节省成本",
+                        description: "节省开挖、换砂和处置费用。显著缩短施工时间表。"
+                    }
+                },
+                verification: {
+                    title: "验证质量与时间节省",
+                    subtitle: "我们使用严格的测试（SCPT、DCPT、平板载荷、CBR）来确保土壤强度。",
+                    testing: {
+                        title: "实验室与现场测试",
+                        description: "我们处理的土壤达到高承载能力，已通过实验室报告和现场测试验证。",
+                        cbr: "<strong><i class=\"fa-solid fa-check\"></i> 浸水CBR：</strong> > 25%（例如：26.8%）",
+                        bearing: "<strong><i class=\"fa-solid fa-check\"></i> 承载能力：</strong> 次日即可满足重型机械移动需求。",
+                        curing: "<strong><i class=\"fa-solid fa-check\"></i> 养护期：</strong> 最大28天达到完全强度。"
+                    }
+                },
+                comparison: {
+                    title: "时间对比：传统方法 vs. Geoterra",
+                    subtitle: "在典型的堤坝项目中节省多达<strong>10个月</strong>。",
+                    conventional: {
+                        label: "传统方法（PVD + 预压）",
+                        duration: "持续时间很长",
+                        period: "包括3-6个月静置期"
+                    },
+                    geoterra: {
+                        label: "Geoterra 土壤混合方法",
+                        duration: "快速通道",
+                        period: "无需静置期"
+                    },
+                    saving: "预计节省时间：10个月"
+                },
+                projects: {
+                    title: "已完成项目（中国）",
+                    subtitle: "在处理大量软土地基方面取得验证成功。",
+                    wuhan: {
+                        title: "武汉金山高速公路",
+                        description: "为5.98公里高速公路处理了292,000立方米的软土地基。解决了环境污染问题。",
+                        volume: "体积：292,000 立方米"
+                    },
+                    hangzhou: {
+                        title: "杭州钢铁（玉环）中心",
+                        description: "位于高含水量的沿海泥滩。为智能制造中心进行固化处理。",
+                        volume: "体积：600,000 立方米"
+                    },
+                    yuhuan: {
+                        title: "玉环S226省道",
+                        description: "在城市连接线项目中应用原位固化方法进行污泥处理。",
+                        volume: "体积：396,000 立方米"
+                    }
+                },
+                footer: {
+                    tagline: "坚实基础，智慧道路。",
+                    collaboration: "中能绿湾（浙江）",
+                    contact: "联系我们",
+                    copyright: "© 2024 Geoterra Solutions Sdn Bhd. 保留所有权利。"
+                }
+            }
+        };
+
+        // Language management
+        let currentLang = localStorage.getItem('preferredLanguage') || 'en';
+
+        function updateLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const keys = key.split('.');
+                let translation = translations[lang];
+                
+                for (let k of keys) {
+                    if (translation && translation[k]) {
+                        translation = translation[k];
+                    } else {
+                        translation = null;
+                        break;
+                    }
+                }
+                
+                if (translation) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.value = translation;
+                    } else {
+                        // Check if translation contains HTML tags
+                        if (translation.includes('<') && translation.includes('>')) {
+                            element.innerHTML = translation;
+                        } else {
+                            element.textContent = translation;
+                        }
+                    }
+                }
+            });
+            
+            // Update language selector
+            document.querySelectorAll('.lang-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-lang') === lang) {
+                    option.classList.add('active');
+                }
+            });
+            
+            // Update current language display
+            const langCodes = { en: 'EN', ms: 'MS', zh: '中文' };
+            document.getElementById('currentLang').textContent = langCodes[lang];
+            if (document.getElementById('currentLangMobile')) {
+                document.getElementById('currentLangMobile').textContent = langCodes[lang];
+            }
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Update page title and meta description
+            if (translations[lang] && translations[lang].meta) {
+                document.title = translations[lang].meta.title;
+                const metaDesc = document.getElementById('pageDescription');
+                if (metaDesc) {
+                    metaDesc.setAttribute('content', translations[lang].meta.description);
+                }
+            }
+        }
+
+        // Initialize language on page load
+        updateLanguage(currentLang);
+
+        // Language selector functionality
+        const langBtn = document.getElementById('langBtn');
+        const langDropdown = document.getElementById('langDropdown');
+        const langBtnMobile = document.getElementById('langBtnMobile');
+        const langDropdownMobile = document.getElementById('langDropdownMobile');
+
+        function toggleLangDropdown(dropdown) {
+            document.querySelectorAll('.lang-dropdown').forEach(d => {
+                if (d !== dropdown) d.classList.remove('active');
+            });
+            dropdown.classList.toggle('active');
+        }
+
+        if (langBtn) {
+            langBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleLangDropdown(langDropdown);
+            });
+        }
+
+        if (langBtnMobile) {
+            langBtnMobile.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleLangDropdown(langDropdownMobile);
+            });
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.language-selector')) {
+                document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
+            }
+        });
+
+        // Language option click handlers
+        document.querySelectorAll('.lang-option').forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                updateLanguage(lang);
+                document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
+            });
+        });
+
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const mobileNav = document.getElementById('mobileNav');
