@@ -20,8 +20,8 @@
     <style>
         /* --- CSS VARIABLES & GLOBAL STYLES --- */
         :root {
-            --primary-blue: #0E3C7E; /* From PPT Header */
-            --primary-green: #2E7D32; /* From PPT Logo/Eco theme */
+            --primary-blue: #0E3C7E; /* From PDF Header */
+            --primary-green: #2E7D32; /* From PDF Logo/Eco theme */
             --accent-light: #F5F7FA;
             --text-dark: #333333;
             --text-gray: #666666;
@@ -81,6 +81,11 @@
             align-items: center;
             gap: 15px;
         }
+        .logo img {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+        }
         .logo-text {
             font-size: 1.4rem;
             font-weight: 800;
@@ -92,362 +97,167 @@
         .nav-links a:hover { color: var(--primary-green); }
         
         /* Language Selector */
-        .language-selector {
-            position: relative;
-            display: inline-block;
-        }
+        .language-selector { position: relative; display: inline-block; }
         .lang-btn {
-            background: transparent;
-            border: 2px solid var(--primary-blue);
-            color: var(--primary-blue);
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
+            background: transparent; border: 2px solid var(--primary-blue); color: var(--primary-blue);
+            padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+            display: flex; align-items: center; gap: 8px; transition: var(--transition);
         }
-        .lang-btn:hover {
-            background: var(--primary-blue);
-            color: var(--white);
-        }
-        .lang-btn i {
-            font-size: 0.85rem;
-        }
+        .lang-btn:hover { background: var(--primary-blue); color: var(--white); }
         .lang-dropdown {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 5px;
-            background: var(--white);
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            min-width: 150px;
-            display: none;
-            z-index: 1002;
+            position: absolute; top: 100%; right: 0; margin-top: 5px;
+            background: var(--white); border: 1px solid #ddd; border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); min-width: 150px; display: none; z-index: 1002;
         }
-        .lang-dropdown.active {
-            display: block;
-        }
+        .lang-dropdown.active { display: block; }
         .lang-option {
-            padding: 12px 20px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-dark);
+            padding: 12px 20px; cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; gap: 10px; color: var(--text-dark);
         }
-        .lang-option:hover {
-            background: var(--accent-light);
-            color: var(--primary-blue);
-        }
-        .lang-option.active {
-            background: var(--primary-blue);
-            color: var(--white);
-        }
-        .lang-option:first-child {
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-        }
-        .lang-option:last-child {
-            border-bottom-left-radius: 4px;
-            border-bottom-right-radius: 4px;
-        }
+        .lang-option:hover { background: var(--accent-light); color: var(--primary-blue); }
+        .lang-option.active { background: var(--primary-blue); color: var(--white); }
 
-        /* Mobile Menu Button */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 1001;
-        }
+        /* Mobile Menu */
+        .menu-toggle { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; }
         .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--primary-blue);
-            transition: var(--transition);
-            border-radius: 2px;
+            width: 25px; height: 3px; background-color: var(--primary-blue);
+            transition: var(--transition); border-radius: 2px;
         }
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
+        .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
-        /* Mobile Sidebar */
         .mobile-nav {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background-color: var(--white);
-            box-shadow: -2px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.3s ease;
-            z-index: 1000;
-            padding: 80px 30px 30px;
-            overflow-y: auto;
+            position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+            background-color: var(--white); box-shadow: -2px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.3s ease; z-index: 1000; padding: 80px 30px 30px; overflow-y: auto;
         }
-        .mobile-nav.active {
-            right: 0;
-        }
-        .mobile-nav ul {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        .mobile-nav.active { right: 0; }
+        .mobile-nav ul { display: flex; flex-direction: column; gap: 20px; }
         .mobile-nav a {
-            display: block;
-            padding: 12px 0;
-            font-weight: 500;
-            color: var(--primary-blue);
-            font-size: 1rem;
-            border-bottom: 1px solid #eee;
-            transition: var(--transition);
-        }
-        .mobile-nav a:hover {
-            color: var(--primary-green);
-            padding-left: 10px;
+            display: block; padding: 12px 0; font-weight: 500;
+            color: var(--primary-blue); font-size: 1rem; border-bottom: 1px solid #eee;
         }
         .mobile-nav a.btn {
-            background-color: var(--primary-green);
-            color: var(--white);
-            padding: 12px 20px;
-            border-radius: 4px;
-            text-align: center;
-            border: none;
-            margin-top: 10px;
-        }
-        .mobile-nav a.btn:hover {
-            background-color: #1b5e20;
-            padding-left: 20px;
-        }
-        .mobile-nav .language-selector {
-            margin-top: 20px;
-        }
-        .mobile-nav .lang-btn {
-            width: 100%;
-            justify-content: center;
-        }
-        .mobile-nav .lang-dropdown {
-            position: relative;
-            margin-top: 10px;
-            box-shadow: none;
-            border: none;
+            background-color: var(--primary-green); color: var(--white);
+            padding: 12px 20px; text-align: center; border: none; margin-top: 10px;
         }
         .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5); z-index: 999;
         }
-        .overlay.active {
-            display: block;
-            opacity: 1;
-        }
+        .overlay.active { display: block; }
 
         /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
             background-color: #333;
+            /* Ensure hero-bg.jpg exists in images folder */
             background-image: linear-gradient(rgba(14, 60, 126, 0.7), rgba(14, 60, 126, 0.4)), url('images/hero-bg.jpg');
             background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            color: var(--white);
-            padding-top: 80px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optimized for large image: 5616x3744px (1.5:1 aspect ratio) */
+            display: flex; align-items: center; color: var(--white); padding-top: 80px;
         }
         .hero-content { max-width: 800px; text-align: left; }
         .hero h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
         .hero p { font-size: 1.3rem; margin-bottom: 40px; font-weight: 300; max-width: 700px; }
-
-        /* --- INTRO & PARTNERSHIP --- */
-        .intro-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
+        
+        .milestone-badge {
+            background: rgba(46, 125, 50, 0.9); color: white; padding: 15px 25px;
+            border-radius: 8px; display: inline-block; margin-top: 20px; font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.3); backdrop-filter: blur(5px);
         }
+
+        /* --- SECTIONS --- */
+        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .intro-text h2 { color: var(--primary-blue); font-size: 2.2rem; margin-bottom: 20px; }
-        .highlight-box {
-            background: #f0f7f1;
-            border-left: 4px solid var(--primary-green);
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .partner-logo {
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
-            align-items: center;
-        }
-        .partner-name { font-weight: bold; color: var(--text-gray); }
-        .intro-img img {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-        }
-        .img img {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-        }
+        .highlight-box { background: #f0f7f1; border-left: 4px solid var(--primary-green); padding: 20px; margin: 20px 0; }
+        
+        .challenges-section { background-color: var(--accent-light); }
+        .challenge-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin-top: 20px; }
 
-        /* --- TECH SECTION --- */
         .tech-section { background-color: #111; color: var(--white); }
         .tech-section h2 { text-align: center; margin-bottom: 60px; font-size: 2.5rem; }
-        
-        .tech-showcase {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
-            align-items: center;
-            margin-bottom: 60px;
-        }
-        .tech-img-box { position: relative; }
-        .tech-img-box img { 
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px; 
-            border: 1px solid #333; 
-        }
-        
+        .tech-showcase { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: center; margin-bottom: 60px; }
+        .tech-img-box img { width: 100%; border-radius: 8px; border: 1px solid #333; }
         .tech-details h3 { color: var(--primary-green); margin-bottom: 15px; font-size: 1.5rem; }
         .tech-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
         .feature-item { background: #222; padding: 20px; border-radius: 6px; }
-        .feature-item h4 { color: var(--primary-blue); color: #4da3ff; margin-bottom: 8px; }
+        .feature-item h4 { color: #4da3ff; margin-bottom: 8px; }
 
-        /* --- ADVANTAGES --- */
-        .advantages { background-color: var(--accent-light); text-align: center; }
+        .advantages { background-color: var(--white); text-align: center; }
         .adv-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 50px; }
-        .adv-card {
-            background: var(--white);
-            padding: 40px 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: var(--transition);
-        }
+        .adv-card { background: var(--accent-light); padding: 40px 30px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: var(--transition); }
         .adv-card:hover { transform: translateY(-10px); }
         .adv-icon { font-size: 2.5rem; color: var(--primary-green); margin-bottom: 20px; }
         .adv-card h3 { color: var(--primary-blue); margin-bottom: 15px; }
 
-        /* --- VERIFICATION & COMPARISON --- */
-        .verification { background: var(--white); }
-        .compare-box { margin-top: 60px; text-align: center; }
-        .compare-img {
-            max-width: 100%;
-            width: 100%;
-            height: auto;
-            margin: 0 auto;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            border-radius: 8px;
+        /* --- VERIFICATION & DUAL IMAGES --- */
+        .verification { background: var(--accent-light); }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { color: var(--primary-blue); font-size: 2.5rem; }
+
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 40px; }
+        
+        .test-card {
+            background: white; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary-blue); display: flex; flex-direction: column;
+            overflow: hidden; height: 100%;
+        }
+        .test-content { padding: 20px 25px 10px; }
+        .test-card h4 { color: var(--primary-blue); margin-bottom: 12px; font-size: 1.15rem; display: flex; align-items: center; gap: 10px; }
+        .test-card ul li { margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 5px; font-size: 0.95rem; }
+        .test-highlight { color: var(--primary-green); font-weight: 700; }
+
+        .test-visuals {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+            margin-top: auto; background: #eee; border-top: 1px solid #ddd;
+        }
+        .visual-item { position: relative; height: 160px; overflow: hidden; }
+        .visual-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        /* Keep graphs contained so they are readable */
+        .visual-item img[alt*="Graph"], .visual-item img[alt*="Report"], .visual-item img[alt*="Chart"] {
+            object-fit: contain; background: #fff;
+        }
+        .visual-item:hover img { transform: scale(1.05); opacity: 0.9; }
+        .visual-label {
+            position: absolute; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.6);
+            color: white; font-size: 0.75rem; text-align: center; padding: 3px 0; pointer-events: none;
         }
 
-        /* --- COMPARISON CHART --- */
-        .comp-container {
-            max-width: 900px;
-            margin: 0 auto;
+        .result-box {
+            background: linear-gradient(to right, var(--primary-blue), #1a4fa0);
+            color: white; padding: 30px; border-radius: 8px;
+            display: flex; align-items: center; gap: 20px; margin-bottom: 50px;
         }
-        .comp-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .comp-header h2 {
-            color: var(--primary-blue);
-        }
-        .comp-visual {
-            width: 100%;
-            max-width: 900px;
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            margin: 0 auto;
-        }
-        .timeline-bar {
-            margin-bottom: 25px;
-        }
-        .timeline-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-        .bar-bg {
-            height: 30px;
-            background: #e0e0e0;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-        }
-        .bar-fill {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 15px;
-            color: white;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-        .bar-conventional {
-            width: 100%;
-            background-color: #d32f2f;
-        }
-        .bar-geoterra {
-            width: 40%;
-            background-color: var(--primary-green);
-            animation: growBar 2s ease-out;
-        }
-        @keyframes growBar {
-            from { width: 0; }
-            to { width: 40%; }
-        }
+        .result-icon { font-size: 2.5rem; color: #81d4fa; }
+        .result-text h4 { margin-bottom: 5px; color: white; }
+
+        /* --- COMPARISON --- */
+        .compare-box { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        .comp-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .comp-img-wrapper img { border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #eee; width: 100%; }
+        
+        .timeline-bar { margin-bottom: 25px; }
+        .timeline-label { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: 700; }
+        .bar-bg { height: 30px; background: #e0e0e0; border-radius: 15px; overflow: hidden; }
+        .bar-fill { height: 100%; display: flex; align-items: center; justify-content: flex-end; padding-right: 15px; color: white; font-size: 0.85rem; font-weight: 600; }
+        .bar-conventional { width: 100%; background-color: #d32f2f; }
+        .bar-geoterra { width: 40%; background-color: var(--primary-green); animation: growBar 2s ease-out; }
+        @keyframes growBar { from { width: 0; } to { width: 40%; } }
         .saving-badge {
-            margin-top: 20px;
-            background: #fff3cd;
-            color: #856404;
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid #ffeeba;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+            margin-top: 20px; background: #fff3cd; color: #856404;
+            padding: 15px; border-radius: 5px; text-align: center; font-weight: bold; font-size: 1.2rem;
         }
 
         /* --- PROJECTS --- */
         .projects { background-color: #F8F9FA; }
-        .section-header { text-align: center; margin-bottom: 50px; }
-        .section-header h2 { color: var(--primary-blue); font-size: 2.5rem; }
-        
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
         .project-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .project-card img { 
-            width: 100%; 
-            height: 500px;
-            object-fit: contain; 
-            object-position: center;
-            background-color: #f5f5f5;
-            display: block;
-        }
+        .project-card img { width: 100%; height: 250px; object-fit: cover; }
         .project-info { padding: 25px; }
         .project-info h3 { color: var(--primary-blue); margin-bottom: 10px; }
         .project-stat { display: inline-block; background: #e3f2fd; color: #0d47a1; padding: 5px 10px; border-radius: 4px; font-size: 0.85rem; font-weight: 600; margin-top: 10px; }
@@ -458,161 +268,30 @@
         .footer-info h4 { font-size: 1.2rem; margin-bottom: 20px; }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; font-size: 0.9rem; color: #ccc; }
 
-        /* --- IMAGE LIGHTBOX --- */
-        .image-clickable {
-            cursor: pointer;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        .image-clickable:hover {
-            transform: scale(1.02);
-            opacity: 0.9;
-        }
+        /* --- LIGHTBOX --- */
+        .image-clickable { cursor: pointer; transition: transform 0.3s; }
+        .image-clickable:hover { transform: scale(1.02); opacity: 0.9; }
         .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s;
+            display: none; position: fixed; z-index: 10000; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9);
+            justify-content: center; align-items: center;
         }
-        .lightbox.active {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            margin: auto;
-            animation: zoomIn 0.3s;
-        }
-        .lightbox-content img {
-            width: 100%;
-            height: auto;
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-        .lightbox-close {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 10001;
-            transition: transform 0.3s ease;
-        }
-        .lightbox-close:hover {
-            transform: rotate(90deg);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes zoomIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+        .lightbox.active { display: flex; }
+        .lightbox-content img { max-width: 90%; max-height: 90vh; border-radius: 8px; }
+        .lightbox-close { position: absolute; top: 20px; right: 40px; color: #fff; font-size: 40px; cursor: pointer; }
 
-        /* Mobile */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            /* Header */
-            .logo-text { font-size: 1rem; }
+            .logo img { height: 80px; }
             .nav-links { display: none; }
             .menu-toggle { display: flex; }
-            .language-selector {
-                margin: 15px 0;
+            .hero {
+                background-attachment: scroll; /* 移动端取消fixed，提升性能 */
             }
-            
-            /* Hero Section */
-            .hero h1 { font-size: 2rem; line-height: 1.3; }
-            .hero p { font-size: 1rem; margin-bottom: 30px; }
-            .hero-content { padding: 0 15px; }
-            
-            /* Buttons */
-            .btn { padding: 12px 25px; font-size: 0.85rem; }
-            
-            /* Sections */
-            .section-padding { padding: 50px 0; }
-            .section-header h2 { font-size: 1.8rem; }
-            
-            /* Intro Section */
-            .intro-grid, .tech-showcase { grid-template-columns: 1fr; gap: 30px; }
-            .intro-text h2 { font-size: 1.6rem; margin-bottom: 15px; }
-            .intro-text p { font-size: 0.95rem; }
-            .intro-text h3 { font-size: 1.3rem; }
-            .highlight-box { padding: 15px; font-size: 0.9rem; }
-            
-            /* Tech Section */
-            .tech-section h2 { font-size: 1.8rem; margin-bottom: 40px; }
-            .tech-details h3 { font-size: 1.3rem; margin-bottom: 12px; }
-            .tech-details p { font-size: 0.95rem; }
-            .feature-item { padding: 15px; }
-            .feature-item h4 { font-size: 1rem; }
-            .feature-item p { font-size: 0.9rem; }
-            
-            /* Advantages Section */
-            .advantages h2 { font-size: 1.8rem; }
-            .adv-cards { grid-template-columns: 1fr; gap: 20px; margin-top: 30px; }
-            .adv-card { padding: 30px 20px; }
-            .adv-icon { font-size: 2rem; margin-bottom: 15px; }
-            .adv-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
-            .adv-card p { font-size: 0.9rem; }
-            
-            /* Verification Section */
-            .verification h2 { font-size: 1.8rem; }
-            .verification h3 { font-size: 1.3rem; }
-            .verification p { font-size: 0.95rem; }
-            .verification ul li { font-size: 0.9rem; }
-            .compare-box h3 { font-size: 1.3rem; }
-            .compare-box p { font-size: 0.95rem; }
-            .comp-visual { padding: 20px; }
-            .timeline-label { font-size: 0.9rem; flex-direction: column; gap: 5px; }
-            .timeline-label span:first-child { font-size: 0.85rem; }
-            .timeline-label span:last-child { font-size: 0.8rem; }
-            .bar-fill { font-size: 0.75rem; padding-right: 10px; }
-            .saving-badge { font-size: 1rem; padding: 12px; }
-            
-            /* Projects Section */
-            .projects h2 { font-size: 1.8rem; }
-            .project-grid { grid-template-columns: 1fr; gap: 20px; }
-            .project-info h3 { font-size: 1.2rem; }
-            .project-info p { font-size: 0.9rem; }
-            .project-stat { font-size: 0.8rem; }
-            
-            /* Footer */
-            .footer-content { flex-direction: column; gap: 30px; }
-            .footer-info h4 { font-size: 1.1rem; margin-bottom: 15px; }
-            .footer-info p { font-size: 0.9rem; }
-            .footer-bottom { font-size: 0.85rem; }
-            
-            /* Container padding */
-            .container { padding: 0 15px; }
-            
-            /* Lightbox mobile */
-            .lightbox-close { top: 10px; right: 20px; font-size: 30px; }
-            .lightbox-content { max-width: 95%; max-height: 85%; }
-        }
-        
-        /* Small Mobile */
-        @media (max-width: 480px) {
-            .hero h1 { font-size: 1.75rem; }
-            .hero p { font-size: 0.95rem; }
-            .section-header h2 { font-size: 1.5rem; }
-            .intro-text h2 { font-size: 1.4rem; }
-            .tech-section h2 { font-size: 1.5rem; }
-            .advantages h2 { font-size: 1.5rem; }
-            .verification h2 { font-size: 1.5rem; }
-            .projects h2 { font-size: 1.5rem; }
-            .comp-visual { padding: 15px; }
-            .timeline-label span { font-size: 0.8rem; }
-            .bar-fill { font-size: 0.7rem; }
+            .hero h1 { font-size: 2rem; }
+            .intro-grid, .tech-showcase, .comp-layout { grid-template-columns: 1fr; }
+            .result-box { flex-direction: column; text-align: center; }
+            .timeline-label { flex-direction: column; }
         }
     </style>
 </head>
@@ -623,6 +302,8 @@
         <div class="container">
             <nav>
                 <div class="logo">
+                    <!-- Company Logo -->
+                    <img src="images/LOGO.png" alt="Geoterra Solutions Logo">
                     <!-- Text Logo -->
                     <div class="logo-text">
                         GEOTERRA SOLUTIONS<br>SDN BHD
@@ -632,83 +313,40 @@
                     <li><a href="#home" data-i18n="nav.home">Home</a></li>
                     <li><a href="#about" data-i18n="nav.about">About</a></li>
                     <li><a href="#tech" data-i18n="nav.tech">Technology</a></li>
-                    <li><a href="#comparison" data-i18n="nav.comparison">Time Comparison</a></li>
+                    <li><a href="#verification" data-i18n="nav.verification">Verification</a></li>
                     <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
                     <li><a href="#contact" class="btn" data-i18n="nav.contact">Contact</a></li>
                     <li>
                         <div class="language-selector">
                             <button class="lang-btn" id="langBtn">
-                                <i class="fa-solid fa-globe"></i>
-                                <span id="currentLang">EN</span>
-                                <i class="fa-solid fa-chevron-down"></i>
+                                <i class="fa-solid fa-globe"></i> <span id="currentLang">EN</span> <i class="fa-solid fa-chevron-down"></i>
                             </button>
                             <div class="lang-dropdown" id="langDropdown">
-                                <div class="lang-option active" data-lang="en">
-                                    <span>🇬🇧</span>
-                                    <span>English</span>
-                                </div>
-                                <div class="lang-option" data-lang="ms">
-                                    <span>🇲🇾</span>
-                                    <span>Bahasa Malaysia</span>
-                                </div>
-                                <div class="lang-option" data-lang="id">
-                                    <span>🇮🇩</span>
-                                    <span>Bahasa Indonesia</span>
-                                </div>
-                                <div class="lang-option" data-lang="zh">
-                                    <span>🇨🇳</span>
-                                    <span>中文</span>
-                                </div>
+                                <div class="lang-option active" data-lang="en">🇬🇧 English</div>
+                                <div class="lang-option" data-lang="ms">🇲🇾 Bahasa Malaysia</div>
+                                <div class="lang-option" data-lang="id">🇮🇩 Bahasa Indonesia</div>
+                                <div class="lang-option" data-lang="zh">🇨🇳 中文</div>
                             </div>
                         </div>
                     </li>
                 </ul>
                 <div class="menu-toggle" id="menuToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                 </div>
             </nav>
         </div>
     </header>
 
-    <!-- Mobile Navigation Sidebar -->
+    <!-- Mobile Nav -->
     <div class="overlay" id="overlay"></div>
     <nav class="mobile-nav" id="mobileNav">
         <ul>
             <li><a href="#home" data-i18n="nav.home">Home</a></li>
             <li><a href="#about" data-i18n="nav.about">About</a></li>
             <li><a href="#tech" data-i18n="nav.tech">Technology</a></li>
-            <li><a href="#comparison" data-i18n="nav.comparison">Time Comparison</a></li>
+            <li><a href="#verification" data-i18n="nav.verification">Verification</a></li>
             <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
             <li><a href="#contact" class="btn" data-i18n="nav.contact">Contact</a></li>
-            <li>
-                <div class="language-selector">
-                    <button class="lang-btn" id="langBtnMobile">
-                        <i class="fa-solid fa-globe"></i>
-                        <span id="currentLangMobile">EN</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                    <div class="lang-dropdown" id="langDropdownMobile">
-                        <div class="lang-option active" data-lang="en">
-                            <span>🇬🇧</span>
-                            <span>English</span>
-                        </div>
-                        <div class="lang-option" data-lang="ms">
-                            <span>🇲🇾</span>
-                            <span>Bahasa Malaysia</span>
-                        </div>
-                        <div class="lang-option" data-lang="id">
-                            <span>🇮🇩</span>
-                            <span>Bahasa Indonesia</span>
-                        </div>
-                        <div class="lang-option" data-lang="zh">
-                            <span>🇨🇳</span>
-                            <span>中文</span>
-                        </div>
-                    </div>
-                </div>
-            </li>
         </ul>
     </nav>
 
@@ -716,33 +354,68 @@
     <section id="home" class="hero">
         <div class="container hero-content">
             <h1 data-i18n="hero.title">Solid Foundations,<br>Smarter Roads.</h1>
-            <p data-i18n="hero.subtitle">Transforming soft ground into strong foundations with advanced In-situ Solidification Technology. Faster, greener, and cost-effective.</p>
-            <a href="#tech" class="btn" data-i18n="hero.button">Learn How It Works</a>
+            <p data-i18n="hero.subtitle">Transforming soft ground into strong foundations with advanced In-situ Solidification Technology.</p>
+            <div class="milestone-badge">
+                <span data-i18n="hero.milestone">1 MIL M3 +<br>of stabilized soil completed in 2024</span>
+            </div>
+            <br><br>
+            <a href="#about" class="btn" data-i18n="hero.button">Discover More</a>
         </div>
     </section>
 
-    <!-- About / Intro Section -->
+    <!-- About Section -->
     <section id="about" class="section-padding">
         <div class="container">
             <div class="intro-grid">
                 <div class="intro-text">
                     <h2 data-i18n="about.title">Company Profile</h2>
-                    <p data-i18n="about.description">Geoterra Solutions Sdn Bhd strives to provide a new dimension in geotechnical treatment service with technology transfer from China specialists. We provide a faster and greener alternative to conventional geotechnical treatment in Malaysia.</p>
+                    <p data-i18n="about.description">Geoterra Solutions Sdn Bhd collaborates with Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd. to promote and implement advanced in-situ soil-mixing technology for soft ground stabilization in Malaysia.</p>
                     
                     <div class="highlight-box">
-                        <p data-i18n="about.collaboration"><strong>Collaboration:</strong> We partner with <strong>Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd.</strong> to implement advanced in-situ soil-mix technology.</p>
+                        <p data-i18n="about.goal">We strive to bring a new dimension to geotechnical treatment services by offering a faster and greener alternative to conventional methods.</p>
                     </div>
 
-                    <h3 data-i18n="about.missionTitle">Mission & Vision</h3>
-                    <ul style="margin-top: 15px; list-style: disc; padding-left: 20px;">
-                        <li data-i18n="about.mission1">Transform soft soils into stable foundations.</li>
-                        <li data-i18n="about.mission2">Deliver fast, cost-effective infrastructure solutions.</li>
+                    <h3 data-i18n="about.vision">Vision</h3>
+                    <p style="margin-bottom:15px; color:var(--primary-blue); font-weight:500;" data-i18n="about.visionText">To be the country’s leading provider of sustainable soil and road infrastructure solutions.</p>
+                    
+                    <h3 data-i18n="about.mission">Mission</h3>
+                    <ul style="list-style: disc; padding-left: 20px;">
+                        <li data-i18n="about.mission1">Transform soft soils into strong, stable foundations.</li>
+                        <li data-i18n="about.mission2">Deliver fast, cost-effective, and sustainable solutions.</li>
                         <li data-i18n="about.mission3">Minimize environmental impact through on-site treatment.</li>
                     </ul>
                 </div>
                 <div class="intro-img">
-                    <!-- Image from PPT Page 2 or 10 -->
-                    <img src="images/intro-excavator.jpg" alt="Excavator performing in-situ solidification" class="image-clickable" style="border-radius: 8px;" data-lightbox="images/intro-excavator.jpg">
+                    <img src="images/intro-excavator.jpg" alt="Excavator" class="image-clickable" data-lightbox="images/intro-excavator.jpg" style="border-radius:8px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section id="challenges" class="section-padding challenges-section">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-img">
+                    <!-- Placeholder using soft soil image -->
+                    <img src="images/test-cbr.jpg" alt="Soft Soil Challenge" class="image-clickable" data-lightbox="images/test-cbr.jpg" style="border-radius:8px;">
+                </div>
+                <div class="intro-text">
+                    <h2 data-i18n="challenges.title">Soft Ground Challenges in Malaysia</h2>
+                    <p data-i18n="challenges.desc">Soft ground such as clay and silt are usually found in abundance in the coastal plains of Peninsular and East Malaysia.</p>
+                    
+                    <div class="challenge-card">
+                        <h4 style="color:var(--primary-blue); margin-bottom:10px;" data-i18n="challenges.charTitle">Characteristics</h4>
+                        <ul style="list-style: circle; padding-left:20px;">
+                            <li data-i18n="challenges.char1">Low shear strength (< 40kPa)</li>
+                            <li data-i18n="challenges.char2">High natural moisture content</li>
+                            <li data-i18n="challenges.char3">Highly compressible & low permeability</li>
+                        </ul>
+                    </div>
+                    <div class="challenge-card">
+                        <h4 style="color:var(--primary-blue); margin-bottom:10px;" data-i18n="challenges.probTitle">Main Geotechnical Problems</h4>
+                        <p data-i18n="challenges.probDesc">Low bearing capacity, unpredictable settlement, and stability issues.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -753,47 +426,39 @@
         <div class="container">
             <h2 data-i18n="tech.title">Methodology & Technology</h2>
             
-            <!-- Tech Block 1: The Head -->
+            <!-- Tech 1: Head -->
             <div class="tech-showcase">
                 <div class="tech-img-box">
-                    <!-- Image from PPT Page 14 (Green mixing head) -->
                     <img src="images/tech-head.jpg" alt="Power Mix Head" class="image-clickable" data-lightbox="images/tech-head.jpg">
                 </div>
                 <div class="tech-details">
-                    <h3 data-i18n="tech.head.title">The Power Mix Head</h3>
-                    <p data-i18n="tech.head.description">An intelligent and powerful mixing head designed to inject stabilizing agents directly into soft soils (muck, clay, swampy ground). It mixes the soil on the spot to form a semi-rigid strong layer.</p>
+                    <h3 data-i18n="tech.head.title">High-Power Mix Head</h3>
+                    <p data-i18n="tech.head.desc">An intelligent mixing head designed to inject stabilizing agents directly into soft soils (muck, clay, swamp) to form a semi-rigid strong layer.</p>
                     <div class="tech-features">
                         <div class="feature-item">
-                            <h4 data-i18n="tech.head.rpmTitle">RPM Speed</h4>
-                            <p data-i18n="tech.head.rpmValue">50 - 120 RPM High Power Mixing</p>
+                            <h4 data-i18n="tech.head.feat1Title">Penetration</h4>
+                            <p data-i18n="tech.head.feat1Desc">1.5 – 3.0m deep soil penetration</p>
                         </div>
                         <div class="feature-item">
-                            <h4 data-i18n="tech.head.productivityTitle">Productivity</h4>
-                            <p data-i18n="tech.head.productivityValue">1,000 m³ / day / set up</p>
+                            <h4 data-i18n="tech.head.feat2Title">Productivity</h4>
+                            <p data-i18n="tech.head.feat2Desc">Up to 1,000 m³ / day</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tech Block 2: Intelligent System -->
-            <div class="tech-showcase" style="direction: rtl;"> <!-- Reverse layout -->
+            <!-- Tech 2: System -->
+            <div class="tech-showcase" style="direction: rtl;">
                 <div class="tech-img-box">
-                    <!-- Image from PPT Page 12 (Silos) -->
-                    <img src="images/tech-silo.jpg" alt="Smart Control Silos" class="image-clickable" data-lightbox="images/tech-silo.jpg">
+                    <img src="images/tech-silo.jpg" alt="Silo Setup" class="image-clickable" data-lightbox="images/tech-silo.jpg">
                 </div>
                 <div class="tech-details" style="direction: ltr; text-align: left;">
                     <h3 data-i18n="tech.system.title">Intelligent Control System</h3>
-                    <p data-i18n="tech.system.description">Zhongneng has independently developed a set of intelligent, digitalized, and highly efficient equipment. The system features automated dosing, scientific quantification, and "One-button stop" management.</p>
-                    <div class="tech-features">
-                        <div class="feature-item">
-                            <h4 data-i18n="tech.system.agentsTitle">Stabilizing Agents</h4>
-                            <p data-i18n="tech.system.agentsValue">Cement, Fly Ash, GGBS & Special Additives</p>
-                        </div>
-                        <div class="feature-item">
-                            <h4 data-i18n="tech.system.depthTitle">Treatment Depth</h4>
-                            <p data-i18n="tech.system.depthValue">Standard operation: 0 ~ 5 meters</p>
-                        </div>
-                    </div>
+                    <p data-i18n="tech.system.desc">Automated dosing and pumping for accuracy. Features a "Digital Monitoring Unit" to track depth, speed, and pressure in real-time.</p>
+                    
+                    <h4 style="color:#4da3ff; margin-top:20px;" data-i18n="tech.system.matTitle">Advanced Green Materials</h4>
+                    <p style="font-size:0.9rem; color:#ccc;" data-i18n="tech.system.matDesc">Composite of mineral-based cementitious materials (Cement, Fly Ash, GGBS) + Additives.</p>
+                    <p style="font-size:0.9rem; color:#ccc; margin-top:10px;" data-i18n="tech.system.matFunc">Transforms soil from hydrophilic (water-attracting) to hydrophobic.</p>
                 </div>
             </div>
         </div>
@@ -802,84 +467,138 @@
     <!-- Advantages Section -->
     <section class="section-padding advantages">
         <div class="container">
-            <h2 style="color: var(--primary-blue); margin-bottom: 20px; font-size: 2.5rem;" data-i18n="advantages.title">Why Choose In-Situ Solidification?</h2>
+            <h2 style="color: var(--primary-blue); margin-bottom: 20px;" data-i18n="adv.title">Key Advantages</h2>
             <div class="adv-cards">
                 <div class="adv-card">
                     <i class="fa-solid fa-leaf adv-icon"></i>
-                    <h3 data-i18n="advantages.eco.title">Eco-Friendly</h3>
-                    <p data-i18n="advantages.eco.description">No excavation and removal of unsuitable soil. Prevents pollution and saves energy by eliminating disposal transportation.</p>
+                    <h3 data-i18n="adv.eco">Environmentally Friendly</h3>
+                    <p data-i18n="adv.ecoDesc">No soil excavation or disposal. Minimizes pollution and carbon emissions.</p>
                 </div>
                 <div class="adv-card">
-                    <i class="fa-solid fa-clock adv-icon"></i>
-                    <h3 data-i18n="advantages.efficiency.title">High Efficiency</h3>
-                    <p data-i18n="advantages.efficiency.description">No surcharge preloading. No long settlement waiting period. Hardened crust forms the next day.</p>
+                    <i class="fa-solid fa-bolt adv-icon"></i>
+                    <h3 data-i18n="adv.effic">High Efficiency</h3>
+                    <p data-i18n="adv.efficDesc">No preloading needed. Hardened crust forms in 1 day. No long settlement period.</p>
                 </div>
                 <div class="adv-card">
-                    <i class="fa-solid fa-money-bill-wave adv-icon"></i>
-                    <h3 data-i18n="advantages.cost.title">Cost Saving</h3>
-                    <p data-i18n="advantages.cost.description">Save costs on excavation, sand replacement, and disposal fees. Reduces construction timeline significantly.</p>
+                    <i class="fa-solid fa-hand-holding-dollar adv-icon"></i>
+                    <h3 data-i18n="adv.cost">Cost Saving</h3>
+                    <p data-i18n="adv.costDesc">Eliminates excavation and disposal costs. Reduces overall project timeline.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Quality & Comparison Section -->
-    <section class="section-padding verification">
+    <!-- Verification / Testing Section (Dual Image Layout) -->
+    <section id="verification" class="section-padding verification">
         <div class="container">
             <div class="section-header">
-                <h2 data-i18n="verification.title">Verified Quality & Time Savings</h2>
-                <p data-i18n="verification.subtitle">We use rigorous testing (SCPT, DCPT, Plate Bearing, CBR) to ensure soil strength.</p>
+                <h2 data-i18n="verify.title">Treated Soil Testing & Results</h2>
+                <p data-i18n="verify.subtitle">Comprehensive verification through On-Site and Laboratory testing.</p>
             </div>
 
-            <div class="intro-grid">
-                <div class="text">
-                    <h3 data-i18n="verification.testing.title">Laboratory & Field Testing</h3>
-                    <p data-i18n="verification.testing.description">Our treated soil achieves high bearing capacity verified by lab reports and field tests.</p>
-                    <ul style="margin-top:20px;">
-                        <li data-i18n="verification.testing.cbr"><strong><i class="fa-solid fa-check"></i> Soaked CBR:</strong> > 25% (Example: 26.8%)</li>
-                        <li data-i18n="verification.testing.bearing"><strong><i class="fa-solid fa-check"></i> Bearing Capacity:</strong> Sufficient for heavy machinery movement the next day.</li>
-                        <li data-i18n="verification.testing.curing"><strong><i class="fa-solid fa-check"></i> Curing Period:</strong> Max 28 days for full strength.</li>
-                    </ul>
-                </div>
-                <div class="img">
-                    <!-- Image from PPT Page 21 or 22 -->
-                    <img src="images/test-cbr.jpg" alt="CBR Test Report" class="image-clickable" style="border: 1px solid #eee; padding: 10px;" data-lightbox="images/test-cbr.jpg">
-                </div>
-            </div>
-
-            <div id="comparison" class="compare-box">
-                <h3 data-i18n="comparison.title">Time Comparison: Conventional vs. Geoterra</h3>
-                <p style="margin-bottom: 20px;" data-i18n="comparison.subtitle">Save up to <strong>10 Months</strong> on a typical embankment project.</p>
+            <!-- Testing Grid Layout -->
+            <div class="test-grid">
                 
-                <div class="comp-visual" style="margin-top: 40px;">
-                    <div class="timeline-bar">
-                        <div class="timeline-label">
-                            <span data-i18n="comparison.conventional.label">Conventional Method (PVD + Preloading)</span>
-                            <span data-i18n="comparison.conventional.duration">Very Long Duration</span>
-                        </div>
-                        <div class="bar-bg">
-                            <div class="bar-fill bar-conventional" data-i18n="comparison.conventional.period">Includes 3-6 Months Resting Period</div>
-                        </div>
+                <!-- Card 1: SCPT (On-Site) -->
+                <div class="test-card">
+                    <div class="test-content">
+                        <h4 data-i18n="verify.onsiteTitle"><i class="fa-solid fa-location-dot"></i> On-Site: SCPT</h4>
+                        <ul>
+                            <li><strong data-i18n="verify.scpt">Static Cone Penetration:</strong> <br><span class="test-highlight">Results ≥ 0.6 MPa</span></li>
+                            <li><strong data-i18n="verify.dcpt">Purpose:</strong> Verifies bearing capacity increases with depth.</li>
+                        </ul>
                     </div>
-
-                    <div class="timeline-bar">
-                        <div class="timeline-label">
-                            <span data-i18n="comparison.geoterra.label">Geoterra Soil-Mix Method</span>
-                            <span data-i18n="comparison.geoterra.duration">Fast Track</span>
+                    <!-- Dual Image Area -->
+                    <div class="test-visuals">
+                        <div class="visual-item">
+                            <span class="visual-label">Site Operation</span>
+                            <img src="images/test-scpt-site.jpg" alt="SCPT Site Photo" class="image-clickable" data-lightbox="images/test-scpt-site.jpg">
                         </div>
-                        <div class="bar-bg">
-                            <div class="bar-fill bar-geoterra" data-i18n="comparison.geoterra.period">No Resting Period</div>
+                        <div class="visual-item">
+                            <span class="visual-label">Data Graph</span>
+                            <img src="images/test-scpt-graph.jpg" alt="SCPT Data Graph" class="image-clickable" data-lightbox="images/test-scpt-graph.jpg">
                         </div>
-                    </div>
-
-                    <div class="saving-badge">
-                        <i class="fa-solid fa-clock"></i> <span data-i18n="comparison.saving">Estimated Time Saving: 10 Months</span>
                     </div>
                 </div>
 
-                <!-- Image from PPT Page 27 (The Excel/Chart Screenshot) -->
-                <!-- If you don't have this image, delete this img tag and the CSS Chart from previous code will be needed -->
-                <img src="images/chart-comparison.jpg" alt="Timeline Comparison Chart" class="compare-img image-clickable" style="margin-top: 40px;" data-lightbox="images/chart-comparison.jpg">
+                <!-- Card 2: Plate Bearing (On-Site) -->
+                <div class="test-card">
+                    <div class="test-content">
+                        <h4><i class="fa-solid fa-weight-hanging"></i> Static Plate Bearing</h4>
+                        <ul>
+                            <li><strong data-i18n="verify.plate">Bearing Capacity:</strong> <br><span class="test-highlight">Results ≥ 100 kPa</span></li>
+                            <li><strong>Method:</strong> Heavy load simulation using concrete blocks.</li>
+                        </ul>
+                    </div>
+                    <!-- Dual Image Area -->
+                    <div class="test-visuals">
+                        <div class="visual-item">
+                            <span class="visual-label">Load Setup</span>
+                            <img src="images/test-plate-site.jpg" alt="Plate Bearing Site" class="image-clickable" data-lightbox="images/test-plate-site.jpg">
+                        </div>
+                        <div class="visual-item">
+                            <span class="visual-label">Settlement Curve</span>
+                            <img src="images/test-plate-graph.jpg" alt="Settlement Chart" class="image-clickable" data-lightbox="images/test-plate-graph.jpg">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Lab Testing -->
+                <div class="test-card">
+                    <div class="test-content">
+                        <h4 data-i18n="verify.labTitle"><i class="fa-solid fa-flask"></i> Laboratory Testing</h4>
+                        <ul>
+                            <li><strong data-i18n="verify.cbr">Soaked CBR:</strong> <span class="test-highlight">> 25% (e.g. 26.8%)</span></li>
+                            <li><strong data-i18n="verify.cube">Cube Test:</strong> Compression strength verification.</li>
+                        </ul>
+                    </div>
+                    <!-- Dual Image Area -->
+                    <div class="test-visuals">
+                        <div class="visual-item">
+                            <span class="visual-label">Lab Equipment</span>
+                            <img src="images/test-lab-machine.jpg" alt="Lab Machine" class="image-clickable" data-lightbox="images/test-lab-machine.jpg">
+                        </div>
+                        <div class="visual-item">
+                            <span class="visual-label">Test Report</span>
+                            <img src="images/test-lab-report.jpg" alt="Lab Report" class="image-clickable" data-lightbox="images/test-lab-report.jpg">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Final Result Conclusion -->
+            <div class="result-box">
+                <div class="result-icon"><i class="fa-solid fa-clipboard-check"></i></div>
+                <div class="result-text">
+                    <h4 data-i18n="verify.resultTitle">Verification Conclusion</h4>
+                    <p data-i18n="verify.resultDesc">Solidified ground forms a hardened crust within a day. Full strength achieved in 14-28 days.</p>
+                </div>
+            </div>
+
+            <!-- Comparison Chart -->
+            <div id="comparison" class="compare-box" style="margin-top: 60px;">
+                <h3 style="text-align:center; color:var(--primary-blue);" data-i18n="compare.title">Time Comparison: Conventional vs Geoterra</h3>
+                <p style="text-align:center; margin-bottom:30px;" data-i18n="compare.subtitle">Conventional PVD + Preloading involves 3-6 months resting period.</p>
+                
+                <div class="comp-layout">
+                    <!-- Chart Image -->
+                    <div class="comp-img-wrapper">
+                         <img src="images/chart-comparison.jpg" alt="Timeline Chart" class="image-clickable" data-lightbox="images/chart-comparison.jpg">
+                    </div>
+                    <!-- Interactive Bars -->
+                    <div class="comp-visual">
+                        <div class="timeline-bar">
+                            <div class="timeline-label"><span>Conventional Method</span> <span>Long Duration</span></div>
+                            <div class="bar-bg"><div class="bar-fill bar-conventional">Includes 3-6 Months Resting Period</div></div>
+                        </div>
+                        <div class="timeline-bar">
+                            <div class="timeline-label"><span>Geoterra Method</span> <span>Fast Track</span></div>
+                            <div class="bar-bg"><div class="bar-fill bar-geoterra">No Resting Period</div></div>
+                        </div>
+                        <div class="saving-badge"><i class="fa-solid fa-clock"></i> Estimated Time Saving: 10 Months</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -888,41 +607,36 @@
     <section id="projects" class="section-padding projects">
         <div class="container">
             <div class="section-header">
-                <h2 data-i18n="projects.title">Completed Projects (China)</h2>
-                <p data-i18n="projects.subtitle">Proven success in treating massive volumes of soft ground.</p>
+                <h2 data-i18n="proj.title">Completed Projects</h2>
+                <p data-i18n="proj.subtitle">Proven track record in China (Transfer Technology)</p>
             </div>
             
             <div class="project-grid">
-                <!-- Project 1 -->
+                <!-- P1 -->
                 <div class="project-card">
-                    <!-- Image from PPT Page 28 -->
-                    <img src="images/project-wuhan.jpg" alt="Wuhan Jinshan Expressway" class="image-clickable" data-lightbox="images/project-wuhan.jpg">
+                    <img src="images/project-wuhan.jpg" alt="Wuhan Project" class="image-clickable" data-lightbox="images/project-wuhan.jpg">
                     <div class="project-info">
-                        <h3 data-i18n="projects.wuhan.title">Jinshan Expressway, Wuhan</h3>
-                        <p data-i18n="projects.wuhan.description">Treated 292,000 m³ of unsuitable soft ground for a 5.98km highway. Resolved environmental pollution concerns.</p>
-                        <span class="project-stat" data-i18n="projects.wuhan.volume">Vol: 292,000 m³</span>
+                        <h3 data-i18n="proj.p1Title">Jinshan Expressway, Wuhan</h3>
+                        <p data-i18n="proj.p1Desc">Treatment of 292,000 m³ unsuitable soft ground. Prevented pollution and resource waste.</p>
+                        <span class="project-stat">Vol: 292,000 m³</span>
                     </div>
                 </div>
-
-                <!-- Project 2 -->
+                <!-- P2 -->
                 <div class="project-card">
-                    <!-- Image from PPT Page 29 -->
-                    <img src="images/project-hangzhou.jpg" alt="Hangzhou Steel Project" class="image-clickable" data-lightbox="images/project-hangzhou.jpg">
+                    <img src="images/project-hangzhou.jpg" alt="Hangzhou Project" class="image-clickable" data-lightbox="images/project-hangzhou.jpg">
                     <div class="project-info">
-                        <h3 data-i18n="projects.hangzhou.title">Hangzhou Steel (Yuhuan) Centre</h3>
-                        <p data-i18n="projects.hangzhou.description">Located on a coastal mudflat with high water content. Solidified for an Intelligent Manufacturing Centre.</p>
-                        <span class="project-stat" data-i18n="projects.hangzhou.volume">Vol: 600,000 m³</span>
+                        <h3 data-i18n="proj.p2Title">Hangzhou Steel Centre</h3>
+                        <p data-i18n="proj.p2Desc">Coastal mudflat with high water content. In-situ solidification met requirements.</p>
+                        <span class="project-stat">Vol: 600,000 m³</span>
                     </div>
                 </div>
-
-                <!-- Project 3 -->
+                <!-- P3 -->
                 <div class="project-card">
-                    <!-- Image from PPT Page 30 -->
-                    <img src="images/project-yuhuan.jpg" alt="Yuhuan Highway" class="image-clickable" data-lightbox="images/project-yuhuan.jpg">
+                    <img src="images/project-yuhuan.jpg" alt="Yuhuan Project" class="image-clickable" data-lightbox="images/project-yuhuan.jpg">
                     <div class="project-info">
-                        <h3 data-i18n="projects.yuhuan.title">Yuhuan S226 Provincial Highway</h3>
-                        <p data-i18n="projects.yuhuan.description">Applied In-situ Solidification Methodology for sludge treatment on the Urban Connection Line Project.</p>
-                        <span class="project-stat" data-i18n="projects.yuhuan.volume">Vol: 396,000 m³</span>
+                        <h3 data-i18n="proj.p3Title">Yuhuan S226 Highway</h3>
+                        <p data-i18n="proj.p3Desc">Urban Connection Line Project. Sludge treatment successfully completed.</p>
+                        <span class="project-stat">Vol: 396,000 m³</span>
                     </div>
                 </div>
             </div>
@@ -935,22 +649,24 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <h4>GEOTERRA SOLUTIONS SDN BHD</h4>
-                    <p data-i18n="footer.tagline">Solid Foundations, Smarter Roads.</p>
-                    <p style="margin-top: 10px; font-size: 0.9rem; opacity: 0.8;" data-i18n="footer.collaboration">In collaboration with Zhongneng Green Bay (Zhejiang)</p>
+                    <p>Solid Foundations, Smarter Roads.</p>
+                    <p style="font-size:0.9rem; opacity:0.7;">Collab: Zhongneng Green Bay (Zhejiang)</p>
                 </div>
                 <div class="footer-info">
-                    <h4 data-i18n="footer.contact">Contact Us</h4>
-                    <p><i class="fa-solid fa-globe"></i> www.geoterra.com.my</p>
-                    <p><i class="fa-solid fa-location-dot"></i> Malaysia</p>
+                    <h4>Contact Us</h4>
+                    <p><i class="fa-solid fa-globe"></i> www.geoterra-solutions.com</p>
+                    <p><i class="fa-solid fa-envelope"></i> tc.sim@geoterra-solutions.com</p>
+                    <p><i class="fa-solid fa-phone"></i> +60125821861</p>
+                    <p><i class="fa-solid fa-location-dot"></i> 14-01, 14th Floor, CP Tower, 11, Jalan 16/11, 50490, Petaling Jaya, Selangor, Malaysia</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <span data-i18n="footer.copyright">&copy; 2024 Geoterra Solutions Sdn Bhd. All Rights Reserved.</span>
+                &copy; 2024 Geoterra Solutions Sdn Bhd. All Rights Reserved.
             </div>
         </div>
     </footer>
 
-    <!-- Lightbox Modal -->
+    <!-- Lightbox -->
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
         <div class="lightbox-content">
@@ -958,658 +674,110 @@
         </div>
     </div>
 
+    <!-- SCRIPTS -->
     <script>
-        // ========== MULTILINGUAL SUPPORT ==========
         const translations = {
             en: {
-                meta: {
-                    title: "Geoterra Solutions | Solid Foundations, Smarter Roads",
-                    description: "Collaborating with Zhongneng Green Bay to provide advanced in-situ shallow soil mix and solidification technology in Malaysia."
+                nav: { home: "Home", about: "About", tech: "Technology", verification: "Verification", projects: "Projects", contact: "Contact" },
+                hero: { title: "Solid Foundations,<br>Smarter Roads.", subtitle: "Transforming soft ground into strong foundations with advanced In-situ Solidification Technology.", milestone: "1 MIL M3 +<br>of stabilized soil completed in 2024", button: "Discover More" },
+                about: { title: "Company Profile", description: "Geoterra Solutions Sdn Bhd collaborates with Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd. to promote and implement advanced in-situ soil-mixing technology for soft ground stabilization in Malaysia.", goal: "We strive to bring a new dimension to geotechnical treatment services by offering a faster and greener alternative to conventional methods.", vision: "Vision", visionText: "To be the country’s leading provider of sustainable soil and road infrastructure solutions.", mission: "Mission", mission1: "Transform soft soils into strong, stable foundations.", mission2: "Deliver fast, cost-effective, and sustainable solutions.", mission3: "Minimize environmental impact through on-site treatment." },
+                challenges: { title: "Soft Ground Challenges in Malaysia", desc: "Soft ground such as clay and silt are usually found in abundance in the coastal plains.", charTitle: "Characteristics", char1: "Low shear strength (< 40kPa)", char2: "High natural moisture content", char3: "Highly compressible & low permeability", probTitle: "Main Geotechnical Problems", probDesc: "Low bearing capacity, unpredictable settlement, and stability issues." },
+                tech: { 
+                    title: "Methodology & Technology", 
+                    head: { title: "High-Power Mix Head", desc: "An intelligent mixing head designed to inject stabilizing agents directly into soft soils.", feat1Title: "Penetration", feat1Desc: "1.5 – 3.0m deep soil penetration", feat2Title: "Productivity", feat2Desc: "Up to 1,000 m³ / day" },
+                    system: { title: "Intelligent Control System", desc: "Automated dosing and pumping for accuracy. Features a 'Digital Monitoring Unit' to track depth, speed, and pressure.", matTitle: "Advanced Green Materials", matDesc: "Composite of mineral-based cementitious materials (Cement, Fly Ash, GGBS) + Additives.", matFunc: "Transforms soil from hydrophilic (water-attracting) to hydrophobic." }
                 },
-                nav: {
-                    home: "Home",
-                    about: "About",
-                    tech: "Technology",
-                    comparison: "Time Comparison",
-                    projects: "Projects",
-                    contact: "Contact"
-                },
-                hero: {
-                    title: "Solid Foundations,<br>Smarter Roads.",
-                    subtitle: "Transforming soft ground into strong foundations with advanced In-situ Solidification Technology. Faster, greener, and cost-effective.",
-                    button: "Learn How It Works"
-                },
-                about: {
-                    title: "Company Profile",
-                    description: "Geoterra Solutions Sdn Bhd strives to provide a new dimension in geotechnical treatment service with technology transfer from China specialists. We provide a faster and greener alternative to conventional geotechnical treatment in Malaysia.",
-                    collaboration: "<strong>Collaboration:</strong> We partner with <strong>Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd.</strong> to implement advanced in-situ soil-mix technology.",
-                    missionTitle: "Mission & Vision",
-                    mission1: "Transform soft soils into stable foundations.",
-                    mission2: "Deliver fast, cost-effective infrastructure solutions.",
-                    mission3: "Minimize environmental impact through on-site treatment."
-                },
-                tech: {
-                    title: "Methodology & Technology",
-                    head: {
-                        title: "The Power Mix Head",
-                        description: "An intelligent and powerful mixing head designed to inject stabilizing agents directly into soft soils (muck, clay, swampy ground). It mixes the soil on the spot to form a semi-rigid strong layer.",
-                        rpmTitle: "RPM Speed",
-                        rpmValue: "50 - 120 RPM High Power Mixing",
-                        productivityTitle: "Productivity",
-                        productivityValue: "1,000 m³ / day / set up"
-                    },
-                    system: {
-                        title: "Intelligent Control System",
-                        description: "Zhongneng has independently developed a set of intelligent, digitalized, and highly efficient equipment. The system features automated dosing, scientific quantification, and \"One-button stop\" management.",
-                        agentsTitle: "Stabilizing Agents",
-                        agentsValue: "Cement, Fly Ash, GGBS & Special Additives",
-                        depthTitle: "Treatment Depth",
-                        depthValue: "Standard operation: 0 ~ 5 meters"
-                    }
-                },
-                advantages: {
-                    title: "Why Choose In-Situ Solidification?",
-                    eco: {
-                        title: "Eco-Friendly",
-                        description: "No excavation and removal of unsuitable soil. Prevents pollution and saves energy by eliminating disposal transportation."
-                    },
-                    efficiency: {
-                        title: "High Efficiency",
-                        description: "No surcharge preloading. No long settlement waiting period. Hardened crust forms the next day."
-                    },
-                    cost: {
-                        title: "Cost Saving",
-                        description: "Save costs on excavation, sand replacement, and disposal fees. Reduces construction timeline significantly."
-                    }
-                },
-                verification: {
-                    title: "Verified Quality & Time Savings",
-                    subtitle: "We use rigorous testing (SCPT, DCPT, Plate Bearing, CBR) to ensure soil strength.",
-                    testing: {
-                        title: "Laboratory & Field Testing",
-                        description: "Our treated soil achieves high bearing capacity verified by lab reports and field tests.",
-                        cbr: "<strong><i class=\"fa-solid fa-check\"></i> Soaked CBR:</strong> > 25% (Example: 26.8%)",
-                        bearing: "<strong><i class=\"fa-solid fa-check\"></i> Bearing Capacity:</strong> Sufficient for heavy machinery movement the next day.",
-                        curing: "<strong><i class=\"fa-solid fa-check\"></i> Curing Period:</strong> Max 28 days for full strength."
-                    }
-                },
-                comparison: {
-                    title: "Time Comparison: Conventional vs. Geoterra",
-                    subtitle: "Save up to <strong>10 Months</strong> on a typical embankment project.",
-                    conventional: {
-                        label: "Conventional Method (PVD + Preloading)",
-                        duration: "Very Long Duration",
-                        period: "Includes 3-6 Months Resting Period"
-                    },
-                    geoterra: {
-                        label: "Geoterra Soil-Mix Method",
-                        duration: "Fast Track",
-                        period: "No Resting Period"
-                    },
-                    saving: "Estimated Time Saving: 10 Months"
-                },
-                projects: {
-                    title: "Completed Projects (China)",
-                    subtitle: "Proven success in treating massive volumes of soft ground.",
-                    wuhan: {
-                        title: "Jinshan Expressway, Wuhan",
-                        description: "Treated 292,000 m³ of unsuitable soft ground for a 5.98km highway. Resolved environmental pollution concerns.",
-                        volume: "Vol: 292,000 m³"
-                    },
-                    hangzhou: {
-                        title: "Hangzhou Steel (Yuhuan) Centre",
-                        description: "Located on a coastal mudflat with high water content. Solidified for an Intelligent Manufacturing Centre.",
-                        volume: "Vol: 600,000 m³"
-                    },
-                    yuhuan: {
-                        title: "Yuhuan S226 Provincial Highway",
-                        description: "Applied In-situ Solidification Methodology for sludge treatment on the Urban Connection Line Project.",
-                        volume: "Vol: 396,000 m³"
-                    }
-                },
-                footer: {
-                    tagline: "Solid Foundations, Smarter Roads.",
-                    collaboration: "In collaboration with Zhongneng Green Bay (Zhejiang)",
-                    contact: "Contact Us",
-                    copyright: "© 2024 Geoterra Solutions Sdn Bhd. All Rights Reserved."
-                }
+                adv: { title: "Key Advantages", eco: "Environmentally Friendly", ecoDesc: "No soil excavation or disposal. Minimizes pollution.", effic: "High Efficiency", efficDesc: "No preloading needed. Hardened crust forms in 1 day.", cost: "Cost Saving", costDesc: "Eliminates excavation and disposal costs. Reduces timeline." },
+                verify: { title: "Treated Soil Testing & Results", subtitle: "Comprehensive verification through On-Site and Laboratory testing.", onsiteTitle: "On-Site: SCPT", scpt: "Static Cone Penetration:", dcpt: "Purpose:", plate: "Bearing Capacity:", labTitle: "Laboratory Testing", cbr: "Soaked CBR:", cube: "Cube Test:", resultTitle: "Verification Conclusion", resultDesc: "Solidified ground forms a hardened crust within a day. Full strength achieved in 14-28 days." },
+                compare: { title: "Time Comparison: Conventional vs Geoterra", subtitle: "Conventional PVD + Preloading involves 3-6 months resting period." },
+                proj: { title: "Completed Projects", subtitle: "Proven track record in China", p1Title: "Jinshan Expressway, Wuhan", p1Desc: "Treatment of 292,000 m³ unsuitable soft ground.", p2Title: "Hangzhou Steel Centre", p2Desc: "Coastal mudflat with high water content.", p3Title: "Yuhuan S226 Highway", p3Desc: "Urban Connection Line Project." }
             },
             ms: {
-                meta: {
-                    title: "Geoterra Solutions | Asas Kukuh, Jalan Lebih Pintar",
-                    description: "Bekerjasama dengan Zhongneng Green Bay untuk menyediakan teknologi campuran dan pengerasan tanah cetek in-situ yang canggih di Malaysia."
-                },
-                nav: {
-                    home: "Laman Utama",
-                    about: "Tentang",
-                    tech: "Teknologi",
-                    comparison: "Perbandingan Masa",
-                    projects: "Projek",
-                    contact: "Hubungi"
-                },
-                hero: {
-                    title: "Asas Kukuh,<br>Jalan Lebih Pintar.",
-                    subtitle: "Mengubah tanah lembut menjadi asas yang kukuh dengan Teknologi Pengerasan In-situ yang canggih. Lebih cepat, lebih mesra alam, dan menjimatkan kos.",
-                    button: "Ketahui Cara Ia Berfungsi"
-                },
-                about: {
-                    title: "Profil Syarikat",
-                    description: "Geoterra Solutions Sdn Bhd berusaha untuk menyediakan dimensi baru dalam perkhidmatan rawatan geoteknikal dengan pemindahan teknologi daripada pakar China. Kami menyediakan alternatif yang lebih cepat dan mesra alam kepada rawatan geoteknikal konvensional di Malaysia.",
-                    collaboration: "<strong>Kerjasama:</strong> Kami bekerjasama dengan <strong>Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd.</strong> untuk melaksanakan teknologi campuran tanah in-situ yang canggih.",
-                    missionTitle: "Misi & Visi",
-                    mission1: "Mengubah tanah lembut menjadi asas yang stabil.",
-                    mission2: "Menyediakan penyelesaian infrastruktur yang cepat dan menjimatkan kos.",
-                    mission3: "Mengurangkan kesan alam sekitar melalui rawatan di tapak."
-                },
-                tech: {
-                    title: "Metodologi & Teknologi",
-                    head: {
-                        title: "Kepala Campuran Berkuasa",
-                        description: "Kepala campuran yang pintar dan berkuasa direka untuk menyuntik agen penstabil terus ke dalam tanah lembut (lumpur, tanah liat, tanah paya). Ia mencampurkan tanah di tempat untuk membentuk lapisan kuat separa tegar.",
-                        rpmTitle: "Kelajuan RPM",
-                        rpmValue: "50 - 120 RPM Pencampuran Berkuasa Tinggi",
-                        productivityTitle: "Produktiviti",
-                        productivityValue: "1,000 m³ / hari / set"
-                    },
-                    system: {
-                        title: "Sistem Kawalan Pintar",
-                        description: "Zhongneng telah membangunkan secara bebas satu set peralatan yang pintar, berdigitkan, dan sangat cekap. Sistem ini mempunyai dos automatik, kuantifikasi saintifik, dan pengurusan \"Satu butang henti\".",
-                        agentsTitle: "Agen Penstabil",
-                        agentsValue: "Simen, Abu Terbang, GGBS & Aditif Khas",
-                        depthTitle: "Kedalaman Rawatan",
-                        depthValue: "Operasi standard: 0 ~ 5 meter"
-                    }
-                },
-                advantages: {
-                    title: "Mengapa Pilih Pengerasan In-situ?",
-                    eco: {
-                        title: "Mesra Alam",
-                        description: "Tiada penggalian dan penyingkiran tanah yang tidak sesuai. Mencegah pencemaran dan menjimatkan tenaga dengan menghapuskan pengangkutan pelupusan."
-                    },
-                    efficiency: {
-                        title: "Kecekapan Tinggi",
-                        description: "Tiada pra-muat tambahan. Tiada tempoh menunggu penempatan yang panjang. Kerak keras terbentuk pada hari berikutnya."
-                    },
-                    cost: {
-                        title: "Penjimatan Kos",
-                        description: "Jimat kos untuk penggalian, penggantian pasir, dan yuran pelupusan. Mengurangkan jadual pembinaan dengan ketara."
-                    }
-                },
-                verification: {
-                    title: "Kualiti Disahkan & Penjimatan Masa",
-                    subtitle: "Kami menggunakan ujian yang ketat (SCPT, DCPT, Plate Bearing, CBR) untuk memastikan kekuatan tanah.",
-                    testing: {
-                        title: "Ujian Makmal & Lapangan",
-                        description: "Tanah yang dirawat kami mencapai kapasiti galas tinggi yang disahkan oleh laporan makmal dan ujian lapangan.",
-                        cbr: "<strong><i class=\"fa-solid fa-check\"></i> CBR Rendam:</strong> > 25% (Contoh: 26.8%)",
-                        bearing: "<strong><i class=\"fa-solid fa-check\"></i> Kapasiti Galas:</strong> Mencukupi untuk pergerakan jentera berat pada hari berikutnya.",
-                        curing: "<strong><i class=\"fa-solid fa-check\"></i> Tempoh Pengerasan:</strong> Maksimum 28 hari untuk kekuatan penuh."
-                    }
-                },
-                comparison: {
-                    title: "Perbandingan Masa: Konvensional vs. Geoterra",
-                    subtitle: "Jimat sehingga <strong>10 Bulan</strong> pada projek tambak biasa.",
-                    conventional: {
-                        label: "Kaedah Konvensional (PVD + Pra-muat)",
-                        duration: "Tempoh Sangat Panjang",
-                        period: "Termasuk Tempoh Rehat 3-6 Bulan"
-                    },
-                    geoterra: {
-                        label: "Kaedah Campuran Tanah Geoterra",
-                        duration: "Laluan Pantas",
-                        period: "Tiada Tempoh Rehat"
-                    },
-                    saving: "Anggaran Penjimatan Masa: 10 Bulan"
-                },
-                projects: {
-                    title: "Projek Siap (China)",
-                    subtitle: "Kejayaan terbukti dalam merawat jumlah besar tanah lembut.",
-                    wuhan: {
-                        title: "Lebuhraya Jinshan, Wuhan",
-                        description: "Merawat 292,000 m³ tanah lembut yang tidak sesuai untuk lebuhraya 5.98km. Menyelesaikan kebimbangan pencemaran alam sekitar.",
-                        volume: "Isipadu: 292,000 m³"
-                    },
-                    hangzhou: {
-                        title: "Pusat Hangzhou Steel (Yuhuan)",
-                        description: "Terletak di dataran lumpur pantai dengan kandungan air tinggi. Dikeraskan untuk Pusat Pembuatan Pintar.",
-                        volume: "Isipadu: 600,000 m³"
-                    },
-                    yuhuan: {
-                        title: "Lebuhraya Wilayah Yuhuan S226",
-                        description: "Menggunakan Metodologi Pengerasan In-situ untuk rawatan enapcemar pada Projek Garisan Sambungan Bandar.",
-                        volume: "Isipadu: 396,000 m³"
-                    }
-                },
-                footer: {
-                    tagline: "Asas Kukuh, Jalan Lebih Pintar.",
-                    collaboration: "Bersama dengan Zhongneng Green Bay (Zhejiang)",
-                    contact: "Hubungi Kami",
-                    copyright: "© 2024 Geoterra Solutions Sdn Bhd. Hak Cipta Terpelihara."
-                }
+                nav: { home: "Laman Utama", about: "Tentang", tech: "Teknologi", verification: "Pengesahan", projects: "Projek", contact: "Hubungi" },
+                hero: { title: "Asas Kukuh,<br>Jalan Lebih Pintar.", subtitle: "Mengubah tanah lembut menjadi asas yang kukuh.", milestone: "1 JUTA M3 +<br>tanah stabil disiapkan pada 2024", button: "Ketahui Lebih Lanjut" },
+                about: { title: "Profil Syarikat", description: "Geoterra Solutions bekerjasama dengan Zhongneng Green Bay untuk memperkenalkan teknologi in-situ di Malaysia.", goal: "Menyediakan alternatif yang lebih cepat dan hijau.", vision: "Visi", visionText: "Menjadi penyedia penyelesaian infrastruktur tanah utama.", mission: "Misi", mission1: "Mengubah tanah lembut menjadi asas kukuh.", mission2: "Penyelesaian pantas dan kos efektif.", mission3: "Meminimumkan kesan alam sekitar." },
+                challenges: { title: "Cabaran Tanah Lembut di Malaysia", desc: "Tanah lembut banyak terdapat di dataran pantai.", charTitle: "Ciri-ciri", char1: "Kekuatan ricih rendah (< 40kPa)", char2: "Kandungan lembapan tinggi", char3: "Kebolehtelapan rendah", probTitle: "Masalah Utama", probDesc: "Kapasiti galas rendah dan enapan tidak dijangka." },
+                tech: { title: "Metodologi & Teknologi", head: { title: "Kepala Campuran Berkuasa", desc: "Menyuntik agen penstabil terus ke dalam tanah.", feat1Title: "Penembusan", feat1Desc: "1.5 – 3.0m dalam", feat2Title: "Produktiviti", feat2Desc: "Sehingga 1,000 m³ / hari" }, system: { title: "Sistem Kawalan Pintar", desc: "Dos automatik dan pemantauan digital.", matTitle: "Bahan Hijau Canggih", matDesc: "Komposit bahan berasaskan mineral.", matFunc: "Menjadikan tanah hidrofobik." } },
+                adv: { title: "Kelebihan Utama", eco: "Mesra Alam", ecoDesc: "Tiada penggalian tanah. Kurang pencemaran.", effic: "Kecekapan Tinggi", efficDesc: "Tiada pra-muat. Kerak keras dalam 1 hari.", cost: "Penjimatan Kos", costDesc: "Hapus kos penggalian dan pelupusan." },
+                verify: { title: "Ujian & Keputusan", subtitle: "Pengesahan melalui ujian Tapak dan Makmal.", onsiteTitle: "Ujian Di Tapak: SCPT", scpt: "Penembusan Kon Statik:", dcpt: "Tujuan:", plate: "Kapasiti Galas:", labTitle: "Ujian Makmal", cbr: "CBR Rendam:", cube: "Ujian Kiub:", resultTitle: "Kesimpulan", resultDesc: "Tanah menjadi keras dalam sehari. Kekuatan penuh dalam 14-28 hari." },
+                compare: { title: "Perbandingan Masa", subtitle: "Kaedah konvensional memerlukan masa rehat 3-6 bulan." },
+                proj: { title: "Projek Siap", subtitle: "Rekod prestasi terbukti di China", p1Title: "Lebuhraya Jinshan", p1Desc: "Rawatan 292,000 m³ tanah lembut.", p2Title: "Pusat Keluli Hangzhou", p2Desc: "Dataran lumpur pantai.", p3Title: "Lebuhraya Yuhuan S226", p3Desc: "Projek sambungan bandar." }
             },
             zh: {
-                meta: {
-                    title: "Geoterra Solutions | 坚实基础，智慧道路",
-                    description: "与中能绿湾合作，在马来西亚提供先进的原位浅层土壤混合和固化技术。"
-                },
-                nav: {
-                    home: "首页",
-                    about: "关于",
-                    tech: "技术",
-                    comparison: "时间对比",
-                    projects: "项目",
-                    contact: "联系"
-                },
-                hero: {
-                    title: "坚实基础，<br>智慧道路。",
-                    subtitle: "采用先进的原位固化技术，将软土地基转化为坚固基础。更快、更环保、更经济。",
-                    button: "了解工作原理"
-                },
-                about: {
-                    title: "公司简介",
-                    description: "Geoterra Solutions Sdn Bhd致力于通过来自中国专家的技术，为岩土处理服务提供新维度。我们在马来西亚提供比传统岩土处理更快、更环保的替代方案。",
-                    collaboration: "<strong>合作：</strong>我们与<strong>中能绿湾（浙江）环境科技有限公司</strong>合作，实施先进的原位土壤混合固化技术。",
-                    missionTitle: "使命与愿景",
-                    mission1: "将软土转化为稳定地基。",
-                    mission2: "提供快速、经济高效的基础设施解决方案。",
-                    mission3: "通过现场处理最大程度减少环境影响。"
-                },
-                tech: {
-                    title: "方法与技术",
-                    head: {
-                        title: "强力混合搅拌头",
-                        description: "智能强大的混合搅拌头，设计用于将固化剂直接注入软土（淤泥、粘土、沼泽地）。它在现场固化土壤，形成半刚性坚固层。",
-                        rpmTitle: "转速",
-                        rpmValue: "50 - 120 RPM 高功率混合",
-                        productivityTitle: "生产力",
-                        productivityValue: "1,000 立方米 / 天 / 套"
-                    },
-                    system: {
-                        title: "智能控制系统",
-                        description: "中能独立开发了一套智能化、数字化、高效的设备。系统具有自动配比、科学量化管理和\"一键停止\"管理功能。",
-                        agentsTitle: "固化剂",
-                        agentsValue: "水泥、粉煤灰、矿渣粉及特殊添加剂",
-                        depthTitle: "处理深度",
-                        depthValue: "标准操作：0 ~ 5 米"
-                    }
-                },
-                advantages: {
-                    title: "为什么选择原位固化？",
-                    eco: {
-                        title: "环保",
-                        description: "无需开挖和移除不合适的土壤。通过消除处置运输来防止污染并节省能源。"
-                    },
-                    efficiency: {
-                        title: "高效率",
-                        description: "无需超载预压。无需长期沉降等待期。硬化表层次日即可形成。"
-                    },
-                    cost: {
-                        title: "节省成本",
-                        description: "节省开挖、换砂和处置费用。显著缩短施工时间表。"
-                    }
-                },
-                verification: {
-                    title: "验证质量与时间节省",
-                    subtitle: "我们使用严格的测试（SCPT、DCPT、平板载荷、CBR）来确保土壤强度。",
-                    testing: {
-                        title: "实验室与现场测试",
-                        description: "我们处理的土壤达到高承载能力，已通过实验室报告和现场测试验证。",
-                        cbr: "<strong><i class=\"fa-solid fa-check\"></i> 浸水CBR：</strong> > 25%（例如：26.8%）",
-                        bearing: "<strong><i class=\"fa-solid fa-check\"></i> 承载能力：</strong> 次日即可满足重型机械移动需求。",
-                        curing: "<strong><i class=\"fa-solid fa-check\"></i> 养护期：</strong> 最大28天达到完全强度。"
-                    }
-                },
-                comparison: {
-                    title: "时间对比：传统方法 vs. Geoterra",
-                    subtitle: "在典型的堤坝项目中节省多达<strong>10个月</strong>。",
-                    conventional: {
-                        label: "传统方法（PVD + 预压）",
-                        duration: "持续时间很长",
-                        period: "包括3-6个月静置期"
-                    },
-                    geoterra: {
-                        label: "Geoterra 土壤混合方法",
-                        duration: "快速通道",
-                        period: "无需静置期"
-                    },
-                    saving: "预计节省时间：10个月"
-                },
-                projects: {
-                    title: "已完成项目（中国）",
-                    subtitle: "在处理大量软土地基方面取得验证成功。",
-                    wuhan: {
-                        title: "武汉金山高速公路",
-                        description: "为5.98公里高速公路处理了292,000立方米的软土地基。解决了环境污染问题。",
-                        volume: "体积：292,000 立方米"
-                    },
-                    hangzhou: {
-                        title: "杭州钢铁（玉环）中心",
-                        description: "位于高含水量的沿海泥滩。为智能制造中心进行固化处理。",
-                        volume: "体积：600,000 立方米"
-                    },
-                    yuhuan: {
-                        title: "玉环S226省道",
-                        description: "在城市连接线项目中应用原位固化方法进行污泥处理。",
-                        volume: "体积：396,000 立方米"
-                    }
-                },
-                footer: {
-                    tagline: "坚实基础，智慧道路。",
-                    collaboration: "中能绿湾（浙江）",
-                    contact: "联系我们",
-                    copyright: "© 2024 Geoterra Solutions Sdn Bhd. 保留所有权利。"
-                }
+                nav: { home: "首页", about: "关于", tech: "技术", verification: "验证", projects: "项目", contact: "联系" },
+                hero: { title: "坚实基础，<br>智慧道路。", subtitle: "利用先进的原位固化技术将软土转化为坚固基础。", milestone: "2024年已完成<br>100万立方米+ 固化土", button: "了解更多" },
+                about: { title: "公司简介", description: "Geoterra Solutions 与中能绿湾合作，在马来西亚推广先进的原位土壤搅拌技术。", goal: "我们致力于提供比传统方法更快、更环保的岩土处理服务。", vision: "愿景", visionText: "成为国家领先的可持续土壤与道路解决方案提供商。", mission: "使命", mission1: "将软土转化为坚固基础。", mission2: "提供快速、经济的解决方案。", mission3: "通过现场处理减少环境影响。" },
+                challenges: { title: "马来西亚软土挑战", desc: "沿海平原常见大量软土（粘土和淤泥）。", charTitle: "特性", char1: "低剪切强度 (< 40kPa)", char2: "高天然含水量", char3: "高压缩性 & 低渗透性", probTitle: "主要岩土问题", probDesc: "承载力低，沉降不可预测。" },
+                tech: { title: "方法与技术", head: { title: "高功率搅拌头", desc: "智能搅拌头将固化剂直接注入软土。", feat1Title: "穿透深度", feat1Desc: "1.5 – 3.0米", feat2Title: "生产力", feat2Desc: "高达 1,000 m³ / 天" }, system: { title: "智能控制系统", desc: "自动配料与泵送。具备实时数字监控。", matTitle: "先进绿色材料", matDesc: "矿物基胶凝材料复合物。", matFunc: "将土壤从亲水转为疏水。" } },
+                adv: { title: "核心优势", eco: "环境友好", ecoDesc: "无开挖或弃土。减少污染。", effic: "高效", efficDesc: "无需预压。1天形成硬壳。", cost: "节省成本", costDesc: "消除开挖和处置成本。" },
+                verify: { title: "测试与结果", subtitle: "通过现场和实验室测试进行全面验证。", onsiteTitle: "现场测试: SCPT", scpt: "静力触探:", dcpt: "目的:", plate: "承载能力:", labTitle: "实验室测试", cbr: "浸水CBR:", cube: "立方体抗压:", resultTitle: "验证结论", resultDesc: "固化地面一天内形成硬壳。14-28天达到完全强度。" },
+                compare: { title: "时间对比", subtitle: "传统PVD需要3-6个月静置期。" },
+                proj: { title: "已完成项目", subtitle: "中国项目实绩", p1Title: "武汉金山大道", p1Desc: "处理292,000 m³软土。", p2Title: "杭州钢铁中心", p2Desc: "沿海滩涂高含水量。", p3Title: "玉环S226省道", p3Desc: "城市连接线项目。" }
             },
             id: {
-                meta: {
-                    title: "Geoterra Solutions | Fondasi Kuat, Jalan Lebih Cerdas",
-                    description: "Berkolaborasi dengan Zhongneng Green Bay untuk menyediakan teknologi pencampuran dan solidifikasi tanah dangkal in-situ yang canggih di Malaysia."
-                },
-                nav: {
-                    home: "Beranda",
-                    about: "Tentang",
-                    tech: "Teknologi",
-                    comparison: "Perbandingan Waktu",
-                    projects: "Proyek",
-                    contact: "Kontak"
-                },
-                hero: {
-                    title: "Fondasi Kuat,<br>Jalan Lebih Cerdas.",
-                    subtitle: "Mengubah tanah lunak menjadi fondasi yang kuat dengan Teknologi Solidifikasi In-situ yang canggih. Lebih cepat, lebih ramah lingkungan, dan hemat biaya.",
-                    button: "Pelajari Cara Kerjanya"
-                },
-                about: {
-                    title: "Profil Perusahaan",
-                    description: "Geoterra Solutions Sdn Bhd berusaha menyediakan dimensi baru dalam layanan perawatan geoteknik dengan transfer teknologi dari spesialis China. Kami menyediakan alternatif yang lebih cepat dan ramah lingkungan untuk perawatan geoteknik konvensional di Malaysia.",
-                    collaboration: "<strong>Kolaborasi:</strong> Kami bermitra dengan <strong>Zhongneng Green Bay (Zhejiang) Environmental Technology Co. Ltd.</strong> untuk mengimplementasikan teknologi pencampuran tanah in-situ yang canggih.",
-                    missionTitle: "Misi & Visi",
-                    mission1: "Mengubah tanah lunak menjadi fondasi yang stabil.",
-                    mission2: "Memberikan solusi infrastruktur yang cepat dan hemat biaya.",
-                    mission3: "Meminimalkan dampak lingkungan melalui perawatan di lokasi."
-                },
-                tech: {
-                    title: "Metodologi & Teknologi",
-                    head: {
-                        title: "Kepala Pencampur Berdaya",
-                        description: "Kepala pencampur yang cerdas dan berdaya dirancang untuk menyuntikkan agen stabilisasi langsung ke dalam tanah lunak (lumpur, tanah liat, tanah rawa). Ini mencampur tanah di tempat untuk membentuk lapisan kuat semi-kaku.",
-                        rpmTitle: "Kecepatan RPM",
-                        rpmValue: "50 - 120 RPM Pencampuran Berdaya Tinggi",
-                        productivityTitle: "Produktivitas",
-                        productivityValue: "1.000 m³ / hari / set"
-                    },
-                    system: {
-                        title: "Sistem Kontrol Cerdas",
-                        description: "Zhongneng telah secara independen mengembangkan seperangkat peralatan yang cerdas, terdigitalisasi, dan sangat efisien. Sistem ini menampilkan dosis otomatis, kuantifikasi ilmiah, dan manajemen \"Satu tombol berhenti\".",
-                        agentsTitle: "Agen Stabilisasi",
-                        agentsValue: "Semen, Abu Terbang, GGBS & Aditif Khusus",
-                        depthTitle: "Kedalaman Perawatan",
-                        depthValue: "Operasi standar: 0 ~ 5 meter"
-                    }
-                },
-                advantages: {
-                    title: "Mengapa Memilih Solidifikasi In-situ?",
-                    eco: {
-                        title: "Ramah Lingkungan",
-                        description: "Tidak ada penggalian dan penghapusan tanah yang tidak cocok. Mencegah polusi dan menghemat energi dengan menghilangkan transportasi pembuangan."
-                    },
-                    efficiency: {
-                        title: "Efisiensi Tinggi",
-                        description: "Tidak ada pra-pemuatan tambahan. Tidak ada periode menunggu penurunan yang lama. Kerak keras terbentuk keesokan harinya."
-                    },
-                    cost: {
-                        title: "Hemat Biaya",
-                        description: "Hemat biaya untuk penggalian, penggantian pasir, dan biaya pembuangan. Mengurangi jadwal konstruksi secara signifikan."
-                    }
-                },
-                verification: {
-                    title: "Kualitas Terverifikasi & Penghematan Waktu",
-                    subtitle: "Kami menggunakan pengujian yang ketat (SCPT, DCPT, Plate Bearing, CBR) untuk memastikan kekuatan tanah.",
-                    testing: {
-                        title: "Pengujian Laboratorium & Lapangan",
-                        description: "Tanah yang dirawat kami mencapai kapasitas dukung tinggi yang diverifikasi oleh laporan laboratorium dan pengujian lapangan.",
-                        cbr: "<strong><i class=\"fa-solid fa-check\"></i> CBR Terendam:</strong> > 25% (Contoh: 26.8%)",
-                        bearing: "<strong><i class=\"fa-solid fa-check\"></i> Kapasitas Dukung:</strong> Cukup untuk pergerakan mesin berat keesokan harinya.",
-                        curing: "<strong><i class=\"fa-solid fa-check\"></i> Periode Pengerasan:</strong> Maksimal 28 hari untuk kekuatan penuh."
-                    }
-                },
-                comparison: {
-                    title: "Perbandingan Waktu: Konvensional vs. Geoterra",
-                    subtitle: "Hemat hingga <strong>10 Bulan</strong> pada proyek tanggul biasa.",
-                    conventional: {
-                        label: "Metode Konvensional (PVD + Pra-pemuatan)",
-                        duration: "Durasi Sangat Panjang",
-                        period: "Termasuk Periode Istirahat 3-6 Bulan"
-                    },
-                    geoterra: {
-                        label: "Metode Pencampuran Tanah Geoterra",
-                        duration: "Jalur Cepat",
-                        period: "Tidak Ada Periode Istirahat"
-                    },
-                    saving: "Perkiraan Penghematan Waktu: 10 Bulan"
-                },
-                projects: {
-                    title: "Proyek Selesai (China)",
-                    subtitle: "Keberhasilan terbukti dalam merawat volume besar tanah lunak.",
-                    wuhan: {
-                        title: "Jalan Tol Jinshan, Wuhan",
-                        description: "Merawat 292.000 m³ tanah lunak yang tidak cocok untuk jalan tol 5,98 km. Menyelesaikan kekhawatiran polusi lingkungan.",
-                        volume: "Vol: 292.000 m³"
-                    },
-                    hangzhou: {
-                        title: "Pusat Hangzhou Steel (Yuhuan)",
-                        description: "Terletak di dataran lumpur pantai dengan kandungan air tinggi. Dikokohkan untuk Pusat Manufaktur Cerdas.",
-                        volume: "Vol: 600.000 m³"
-                    },
-                    yuhuan: {
-                        title: "Jalan Provinsi Yuhuan S226",
-                        description: "Menerapkan Metodologi Solidifikasi In-situ untuk perawatan lumpur pada Proyek Jalur Koneksi Perkotaan.",
-                        volume: "Vol: 396.000 m³"
-                    }
-                },
-                footer: {
-                    tagline: "Fondasi Kuat, Jalan Lebih Cerdas.",
-                    collaboration: "Zhongneng Green Bay (Zhejiang)",
-                    contact: "Hubungi Kami",
-                    copyright: "© 2024 Geoterra Solutions Sdn Bhd. Hak Cipta Dilindungi."
-                }
+                nav: { home: "Beranda", about: "Tentang", tech: "Teknologi", verification: "Verifikasi", projects: "Proyek", contact: "Kontak" },
+                hero: { title: "Fondasi Kuat,<br>Jalan Cerdas.", subtitle: "Mengubah tanah lunak menjadi fondasi kuat.", milestone: "1 JUTA M3 +<br>tanah stabil selesai pada 2024", button: "Temukan Lebih Banyak" },
+                about: { title: "Profil Perusahaan", description: "Geoterra Solutions bekerja sama dengan Zhongneng Green Bay untuk teknologi in-situ.", goal: "Menyediakan alternatif yang lebih cepat dan hijau.", vision: "Visi", visionText: "Menjadi penyedia solusi infrastruktur tanah terkemuka.", mission: "Misi", mission1: "Ubah tanah lunak jadi kuat.", mission2: "Solusi cepat & hemat biaya.", mission3: "Minimalkan dampak lingkungan." },
+                challenges: { title: "Tantangan Tanah Lunak", desc: "Tanah lunak banyak ditemukan di dataran pantai.", charTitle: "Karakteristik", char1: "Kekuatan geser rendah (< 40kPa)", char2: "Kadar air tinggi", char3: "Kompresibilitas tinggi", probTitle: "Masalah Utama", probDesc: "Daya dukung rendah & penurunan tak terduga." },
+                tech: { title: "Metodologi & Teknologi", head: { title: "Kepala Pencampur", desc: "Menyuntikkan agen stabilisasi langsung ke tanah.", feat1Title: "Penetrasi", feat1Desc: "1.5 – 3.0m dalam", feat2Title: "Produktivitas", feat2Desc: "Hingga 1,000 m³ / hari" }, system: { title: "Sistem Kontrol Cerdas", desc: "Dosis otomatis & pemantauan digital.", matTitle: "Bahan Hijau Maju", matDesc: "Komposit bahan berbasis mineral.", matFunc: "Mengubah tanah menjadi hidrofobik." } },
+                adv: { title: "Keuntungan Utama", eco: "Ramah Lingkungan", ecoDesc: "Tanpa penggalian tanah. Minim polusi.", effic: "Efisiensi Tinggi", efficDesc: "Tanpa preloading. Kerak keras dalam 1 hari.", cost: "Hemat Biaya", costDesc: "Hilangkan biaya penggalian & pembuangan." },
+                verify: { title: "Pengujian & Hasil", subtitle: "Verifikasi melalui uji Lokasi dan Lab.", onsiteTitle: "Uji Di Lokasi: SCPT", scpt: "Penetrasi Kerucut Statis:", dcpt: "Tujuan:", plate: "Kapasitas Dukung:", labTitle: "Uji Laboratorium", cbr: "Uji CBR:", cube: "Uji Kubus:", resultTitle: "Kesimpulan", resultDesc: "Tanah mengeras dalam sehari. Kekuatan penuh dalam 14-28 hari." },
+                compare: { title: "Perbandingan Waktu", subtitle: "Metode konvensional butuh 3-6 bulan istirahat." },
+                proj: { title: "Proyek Selesai", subtitle: "Rekam jejak terbukti di China", p1Title: "Jalan Tol Jinshan", p1Desc: "Perawatan 292,000 m³ tanah lunak.", p2Title: "Pusat Baja Hangzhou", p2Desc: "Dataran lumpur pantai.", p3Title: "Jalan Raya Yuhuan S226", p3Desc: "Proyek koneksi perkotaan." }
             }
         };
 
-        // Language management
         let currentLang = localStorage.getItem('preferredLanguage') || 'en';
 
         function updateLanguage(lang) {
             currentLang = lang;
             localStorage.setItem('preferredLanguage', lang);
-            
-            // Update all elements with data-i18n attribute
             document.querySelectorAll('[data-i18n]').forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                const keys = key.split('.');
+                const keys = element.getAttribute('data-i18n').split('.');
                 let translation = translations[lang];
-                
                 for (let k of keys) {
-                    if (translation && translation[k]) {
-                        translation = translation[k];
-                    } else {
-                        translation = null;
-                        break;
-                    }
+                    if (translation && translation[k]) translation = translation[k];
+                    else { translation = null; break; }
                 }
-                
-                if (translation) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.value = translation;
-                    } else {
-                        // Check if translation contains HTML tags
-                        if (translation.includes('<') && translation.includes('>')) {
-                            element.innerHTML = translation;
-                        } else {
-                            element.textContent = translation;
-                        }
-                    }
-                }
+                if (translation) element.innerHTML = translation;
             });
-            
-            // Update language selector
-            document.querySelectorAll('.lang-option').forEach(option => {
-                option.classList.remove('active');
-                if (option.getAttribute('data-lang') === lang) {
-                    option.classList.add('active');
-                }
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
             });
-            
-            // Update current language display
-            const langCodes = { en: 'EN', ms: 'MS', id: 'ID', zh: '中文' };
-            document.getElementById('currentLang').textContent = langCodes[lang];
-            if (document.getElementById('currentLangMobile')) {
-                document.getElementById('currentLangMobile').textContent = langCodes[lang];
-            }
-            
-            // Update HTML lang attribute
-            document.documentElement.lang = lang;
-            
-            // Update page title and meta description
-            if (translations[lang] && translations[lang].meta) {
-                document.title = translations[lang].meta.title;
-                const metaDesc = document.getElementById('pageDescription');
-                if (metaDesc) {
-                    metaDesc.setAttribute('content', translations[lang].meta.description);
-                }
-            }
+            const labels = { en: 'EN', ms: 'MS', id: 'ID', zh: '中文' };
+            document.getElementById('currentLang').textContent = labels[lang];
         }
 
-        // Initialize language on page load
         updateLanguage(currentLang);
 
-        // Language selector functionality
         const langBtn = document.getElementById('langBtn');
         const langDropdown = document.getElementById('langDropdown');
-        const langBtnMobile = document.getElementById('langBtnMobile');
-        const langDropdownMobile = document.getElementById('langDropdownMobile');
-
-        function toggleLangDropdown(dropdown) {
-            document.querySelectorAll('.lang-dropdown').forEach(d => {
-                if (d !== dropdown) d.classList.remove('active');
-            });
-            dropdown.classList.toggle('active');
-        }
-
-        if (langBtn) {
-            langBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleLangDropdown(langDropdown);
-            });
-        }
-
-        if (langBtnMobile) {
-            langBtnMobile.addEventListener('click', (e) => {
-                e.stopPropagation();
-                toggleLangDropdown(langDropdownMobile);
-            });
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.language-selector')) {
-                document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
-            }
+        langBtn.addEventListener('click', (e) => { e.stopPropagation(); langDropdown.classList.toggle('active'); });
+        document.addEventListener('click', () => langDropdown.classList.remove('active'));
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.addEventListener('click', () => updateLanguage(opt.getAttribute('data-lang')));
         });
 
-        // Language option click handlers
-        document.querySelectorAll('.lang-option').forEach(option => {
-            option.addEventListener('click', () => {
-                const lang = option.getAttribute('data-lang');
-                updateLanguage(lang);
-                document.querySelectorAll('.lang-dropdown').forEach(d => d.classList.remove('active'));
-            });
-        });
-
-        // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const mobileNav = document.getElementById('mobileNav');
         const overlay = document.getElementById('overlay');
-        const mobileNavLinks = mobileNav.querySelectorAll('a');
-
         function toggleMenu() {
-            menuToggle.classList.toggle('active');
-            mobileNav.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            menuToggle.classList.toggle('active'); mobileNav.classList.toggle('active'); overlay.classList.toggle('active');
         }
-
         menuToggle.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
+        mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', toggleMenu));
 
-        // Close menu when clicking on a link
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                toggleMenu();
-            });
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#' && href !== '') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        const headerOffset = 80;
-                        const elementPosition = target.getBoundingClientRect().top;
-                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                        window.scrollTo({
-                            top: offsetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-            });
-        });
-
-        // Image Lightbox Functionality
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxClose = document.querySelector('.lightbox-close');
-        const clickableImages = document.querySelectorAll('.image-clickable');
-
-        // Open lightbox when clicking on an image
-        clickableImages.forEach(img => {
-            img.addEventListener('click', function() {
-                const imgSrc = this.getAttribute('data-lightbox') || this.getAttribute('src');
-                const imgAlt = this.getAttribute('alt') || '';
-                lightboxImg.setAttribute('src', imgSrc);
-                lightboxImg.setAttribute('alt', imgAlt);
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
+        const lbImg = document.getElementById('lightbox-img');
+        const lbClose = document.querySelector('.lightbox-close');
+        document.querySelectorAll('.image-clickable').forEach(img => {
+            img.addEventListener('click', () => {
+                lbImg.src = img.getAttribute('data-lightbox') || img.src; lightbox.classList.add('active');
             });
         });
-
-        // Close lightbox
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        lightboxClose.addEventListener('click', closeLightbox);
-
-        // Close lightbox when clicking on the background
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-
-        // Close lightbox with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                closeLightbox();
-            }
-        });
+        lbClose.addEventListener('click', () => lightbox.classList.remove('active'));
+        lightbox.addEventListener('click', (e) => { if(e.target===lightbox) lightbox.classList.remove('active'); });
     </script>
-
 </body>
 </html>
-
